@@ -1,47 +1,24 @@
+// Récupérer les produits depuis localStorage
+let listeProduits = JSON.parse(localStorage.getItem("produits")) || [];
 
- /*let data_array;
+let tbody = document.querySelector("#dataTable tbody");
 
-if(localStorage.produits !=null){
-   data_array=JSON.parse(localStorage.produits);
+tbody.innerHTML = "";
 
-let tbody = document.querySelector("table tbody"); // premier tbody qui se trouve dans table  presque getElementsByTagName("tbody")[0] mais tbody en quelconque
-   for(j= 0;j<data_array.length;j++){
-   let tr = document.createElement("tr");
-  Object.values(data_array[j]).forEach(element => {
-     let td = document.createElement("td");
-        td.textContent = element;
-        tr.appendChild(td);
-   });
-        tbody.appendChild(tr);
-  }
-const aujourdhui = new Date();
-console.log(aujourdhui); 
-
-  }
- else{
-console.log("La liste est vide !!!")    
- }
-
-
-//localStorage.clear();
-
-console.log(data_array);*/
-
-let listeColis = JSON.parse(localStorage.getItem("colis")) || [];
-
-    let tbody = document.querySelector("#dataTable tbody");
-
-    // Afficher chaque colis
-    listeColis.forEach(colis => {
-      let row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${colis.ville_ramassage}</td>
-        <td>${colis.ville_client}</td>
-        <td>${colis.nom_client}</td>
-        <td>${colis.montant}</td>
-        <td>${colis.telephone_client}</td>
-        <td>${colis.adresse_client}</td>
-        <td>${colis.produit}</td>
-      `;
-      tbody.appendChild(row);
-    });
+listeProduits.forEach(produit => {
+  let row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${produit.ville_ramassage}</td>
+    <td>${produit.ville_client}</td>
+    <td>${produit.type_livraison}</td>
+    <td>${produit.nom_client}</td>
+    <td>${produit.montant_produits}</td>
+    <td>${produit.tarif_livraison}</td>
+    <td>${produit.montant_net}</td>
+    <td>${produit.telephone_client}</td>
+    <td>${produit.adresse_client}</td>
+    <td>${produit.produit}</td>
+    <td>${produit.date}</td>
+  `;
+  tbody.appendChild(row);
+});

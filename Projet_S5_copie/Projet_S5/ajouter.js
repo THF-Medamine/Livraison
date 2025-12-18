@@ -1,116 +1,89 @@
+// Tableau des tarifs par ville et type
+const tarifsLivraison = {
+  "Casablanca": { standard: 25, express: 40 },
+  "Rabat": { standard: 30, express: 45 },
+  "Marrakech": { standard: 35, express: 50 },
+  "Fès": { standard: 30, express: 45 },
+  "Tanger": { standard: 35, express: 50 },
+  "Agadir": { standard: 40, express: 55 },
+  "Oujda": { standard: 45, express: 60 },
+  "Meknès": { standard: 30, express: 45 },
+  "Kenitra": { standard: 28, express: 42 },
+  "El Jadida": { standard: 32, express: 47 },
+  "Nador": { standard: 40, express: 55 },
+  "Settat": { standard: 28, express: 42 },
+  "Mohammedia": { standard: 26, express: 41 },
+  "Laâyoune": { standard: 60, express: 80 },
+  "Dakhla": { standard: 70, express: 90 }
+};
 
-/*function ajouter() {
-    // Récupération des champs
-    let ville_ramassage = document.getElementById("ville_ramassage");
-    let ville_client = document.getElementById("ville_client");
-    let nom_client = document.getElementById("Nom_client");
-    let montant = document.getElementById("Montant");
-    let telephone_client = document.getElementById("telephone_client");
-    let adresse_client = document.getElementById("Adreese_client");
-    let produit = document.getElementById("Produit");
-    // Quand la page se charge, remplir automatiquement le champ ville_ramassage
-
-    if (
-        trim(ville_ramassage) === "" ||
-        trim(ville_client) === "" ||
-        trim(nom_client) === "" ||
-        trim(montant) === "" ||
-        trim(telephone_client) === "" ||
-        trim(adresse_client) === "" ||
-        trim(produit) === ""
-    ) 
-    {
-        alert("⚠️ Veuillez remplir tous les champs avant d'enregistrer !");
-        return; // stoppe la fonction
-    }
-
-    // Si tout est rempli → stocker dans localStorage
-    localStorage.setItem("ville_ramassage", ville_ramassage.value);
-    localStorage.setItem("ville_client", ville_client.value);
-    localStorage.setItem("Nom_client", nom_client.value);
-    localStorage.setItem("Montant", montant.value);
-    localStorage.setItem("telephone_client", telephone_client.value);
-    localStorage.setItem("Adreese_client", adresse_client.value);
-    localStorage.setItem("Produit", produit.value);
-
-    alert("✅ Données enregistrées avec succès !");
-    localStorage.clear();
-}*/
- 
-
-
-
-
- /*if(localStorage.length>0){
-   ville_ramassage.value=localStorage.getItem("ville_ramassage");
-   console.log(ville_ramassage.value);
-  }*/
-   // Initialiser le tableau depuis localStorage
-// Initialiser le tableau depuis localStorage
+// Charger les données existantes
 let data_array = [];
-if (localStorage.getItem("produits") != null) {
-    data_array = JSON.parse(localStorage.getItem("produits"));
+if (localStorage.getItem("produits") !== null) {
+  data_array = JSON.parse(localStorage.getItem("produits"));
 }
 
-// Fonction ajouter (appelée au submit du formulaire)
+// Fonction ajouter
 function ajouter(e) {
-    e.preventDefault(); // empêche le rechargement automatique
+  e.preventDefault();
+  
+  // Récupération des champs
+  let villeRamassage = document.getElementById("ville_ramassage").value.trim();
+  let villeClient = document.getElementById("ville_client").value.trim();
+  let typeLivraison = document.getElementById("type_livraison").value.trim();
+  let nomClient = document.getElementById("Nom_client").value.trim();
+  let montantProduits = parseFloat(document.getElementById("Montant").value);
+  let telephoneClient = document.getElementById("telephone_client").value.trim();
+  let adresseClient = document.getElementById("Adreese_client").value.trim();
+  let produit = document.getElementById("Produit").value.trim();
 
-    // Récupération des champs
-    let ville_ramassage = document.getElementById("ville_ramassage");
-    let ville_client = document.getElementById("ville_client");
-    let Nom_client = document.getElementById("Nom_client");
-    let Montant = document.getElementById("Montant");
-    let telephone_client = document.getElementById("telephone_client");
-    let Adresse_client = document.getElementById("Adreese_client");
-    let Produit = document.getElementById("Produit");
+  // Vérification si un champ est vide
+  if (!villeRamassage || !villeClient || !typeLivraison || !nomClient || !montantProduits || !telephoneClient || !adresseClient || !produit) {
+    alert("⚠️ Veuillez remplir tous les champs !");
+    return;
+  }
 
-    // Vérification si un champ est vide
-    let inputs = [ville_ramassage, ville_client, Nom_client, Montant, telephone_client, Adresse_client, Produit];
-    let allValid = true;
+  // Vérifier que la ville existe dans le tableau
+  if (!tarifsLivraison[villeClient]) {
+    alert("⚠️ Ville non trouvée dans la liste des tarifs !");
+    return;
+  }
 
-    inputs.forEach(input => {
-        if (input.value.trim() === "") {
-            input.classList.add("invalid");
-            allValid = false;
-        } else {
-            input.classList.remove("invalid");
-        }
-    });
+  // Récupérer le tarif selon ville et type
+  let tarif = tarifsLivraison[villeClient][typeLivraison];
+  let montantNet = montantProduits - tarif;
 
-    if (!allValid) {
-        alert("⚠️ Veuillez remplir tous les champs avant d'enregistrer !");
-        return;
-    }
+  // Création de l’objet colis
+  const date = new Date();
+  let data = {
+    ville_ramassage: villeRamassage,
+    ville_client: villeClient,
+    type_livraison: typeLivraison,
+    nom_client: nomClient,
+    montant_produits: montantProduits,
+    tarif_livraison: tarif,
+    montant_net: montantNet,
+    telephone_client: telephoneClient,
+    adresse_client: adresseClient,
+    produit: produit,
+    date: date.toLocaleString()
+  };
 
-    // Création de l’objet colis
-    const date = new Date();
-    let data = {
-        ville_ramassage: ville_ramassage.value,
-        ville_client: ville_client.value,
-        Nom_client: Nom_client.value,
-        Montant: Montant.value,
-        telephone_client: telephone_client.value,
-        Adresse_client: Adresse_client.value,
-        Produit: Produit.value,
-        date: date
-    };
+  // Ajouter au tableau
+  data_array.push(data);
 
-    // Ajouter au tableau
-    data_array.push(data);
+  // Sauvegarde dans localStorage
+  localStorage.setItem("produits", JSON.stringify(data_array));
 
-    // Sauvegarde dans localStorage
-    localStorage.setItem("produits", JSON.stringify(data_array));
+  // Confirmation
+  alert(
+    "✅ Colis enregistré !\n" +
+    "Ville: " + villeClient + "\n" +
+    "Type: " + typeLivraison + "\n" +
+    "Montant net: " + montantNet + " MAD"
+  );
 
-    alert("✅ Colis enregistré avec succès !");
-
-    // Réinitialiser les champs
-    inputs.forEach(input => input.value = "");
+  // Réinitialiser les champs
+  document.querySelectorAll("#ville_ramassage, #ville_client, #type_livraison, #Nom_client, #Montant, #telephone_client, #Adreese_client, #Produit")
+    .forEach(input => input.value = "");
 }
-
-
-
-// crere le 13/3/244
-// statue ...
-// CODE 
-// FRAIS DE LIVRASION 

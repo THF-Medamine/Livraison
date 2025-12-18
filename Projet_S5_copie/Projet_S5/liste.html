@@ -1,43 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="liste.css">
+    <title>Liste des livraisons</title>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo">
-       <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
-    </div>
+            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
+        </div>
         <h3>Menu</h3>
         <ul>
             <li><a href="#">Accueil</a></li>
-            <li><a href="ajouter.html">ajouter une colie</a></li>
+            <li><a href="ajouter.html">Ajouter une colis</a></li>
             <li><a href="ramassage.htm">Ramassage</a></li>
-            <li><a href="liste.html">liste des livraison</a></li>
-            <li><a href="ville_tarif.html">liste des tarifs</a></li>
+            <li><a href="liste.html">Liste des livraisons</a></li>
+            <li><a href="ville_tarif.html">Liste des tarifs</a></li>
             <li><a href="#">Déconnexion</a></li>
         </ul>
     </div>
-    <table id="dataTable">
-        <thead>
-            <tr>
-                <th>Ville ramassage</th>
-                <th>Ville client</th>
-                <th>Nom client</th>
-                <th>Montant</th>
-                <th>Téléphone</th>
-                <th>Adresse</th>
-                <th>Produit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Les données seront insérées ici par JS -->
-        </tbody>
-    </table>
+
+    <div class="main-content">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Ville ramassage</th>
+                    <th>Ville client</th>
+                    <th>Type livraison</th>
+                    <th>Nom client</th>
+                    <th>Montant Produit</th>
+                    <th>Tarif livraison</th>
+                    <th>Montant Net</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Produit</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données seront insérées ici par JS -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="liste.js"></script>
 </body>
 </html>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animation de fond dynamique */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveBackground 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moveBackground {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+.sidebar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.sidebar h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(10px);
+}
+
+/* Conteneur principal */
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Titre */
+h2 {
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tableau */
+table {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    border-collapse: collapse;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+table th {
+    padding: 20px 25px;
+    text-align: left;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 13px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f7fafc;
+}
+
+table tbody tr:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
+    transform: translateX(-5px);
+}
+
+table td {
+    padding: 16px 25px;
+    color: #2d3748;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+table td:nth-child(2),
+table td:nth-child(3) {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    h2 {
+        font-size: 22px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+table td { padding: 16px 25px; color: #2d3748; font-size: 14px; font-weight: 500; }
+  </style>
