@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="ajouter.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+       <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
+    </div>
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="ajouter.html">ajouter une colie</a></li>
+            <li><a href="ramassage.htm">Ramassage</a></li>
+            <li><a href="liste.html">liste des livraison</a></li>
+            <li><a href="ville_tarif.html">liste des tarifs</a></li>
+            <li><a href="#">Déconnexion</a></li>
+        </ul>
+    </div>
+    <div class="inputs">
+        <label for="">ville ramassage</label>
+        <input type="text" id="ville_ramassage"> <br>
+        <label for="" >ville du client </label> 
+        <input type="text" id="ville_client"> <br>
+        <label for="" >Nom du client<input type="text" id="Nom_client"> </label>
+        <label for="">Montant total <input type="number" id="Montant"></label>
+        <label for="" >Téléphone du client<input type="number" id="telephone_client"> </label>
+        <label for="" >Adresse du client<input type="text" id="Adreese_client"> </label>
+        <label for="" >Produits<input type="text" id="Produit"> </label>
+<input type="submit" value="Enregistrer"  onclick="ajouter()">
+</div>   
+
+
+<script src="ajouter.js"></script>
+</body>
+</html>

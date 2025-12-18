@@ -1,0 +1,77 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa; /* Arrière-plan très clair, presque blanc */
+}
+
+/* 2. Style de la Barre Latérale (Sidebar) - Positionnement à gauche */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0d47a1; /* Bleu foncé/Marine (couleur dominante du menu) */
+    padding-top: 20px;
+    color: white;
+    box-shadow: 2px 0 10px rgba(0, 50, 100, 0.2); /* Ombre bleutée */
+    z-index: 100; /* Assure que le menu est au-dessus du contenu */
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    color: #e3f2fd; /* Bleu très clair */
+    letter-spacing: 1px;
+}
+
+/* 3. Style des listes de liens */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 4. Style des liens */
+.sidebar a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: white; /* Texte par défaut en blanc */
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Effet dynamique au survol des liens */
+.sidebar a:hover {
+    background-color: #1e88e5; /* Bleu plus clair au survol */
+    color: #ffffff; /* Texte reste blanc */
+    /* On pourrait aussi le faire passer au blanc pur : background-color: white; color: #0d47a1; */
+}
+
+/* Style pour le lien actuellement actif (si vous ajoutez une classe "active" dans le HTML) */
+.sidebar a.active {
+    background-color: #ffffff; /* Fond blanc */
+    color: #0d47a1; /* Texte en bleu pour le contraste */
+    font-weight: bold;
+    border-left: 5px solid #1e88e5; /* Barre de couleur à gauche */
+    padding-left: 10px; /* Ajustement du padding */
+}
+
+/* 5. Style du Contenu Principal */
+.content {
+    /* Très important: ajoute une marge à gauche égale à la largeur de la sidebar */
+    margin-left: 250px; 
+    padding: 30px;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.content h1 {
+    color: #1e3a8a; /* Bleu foncé */
+    border-bottom: 2px solid #e3f2fd; /* Ligne de séparation bleu clair */
+    padding-bottom: 15px;
+    margin-top: 0;
+}

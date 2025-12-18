@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramassage</title>
+    <link rel="stylesheet" href="ramassage.css">
+</head>
+<body>
+    
+    
+    <div class="sidebar"> 
+        <div class="logo">
+       <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
+    </div>
+        
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="ajouter.html">ajouter une colie</a></li>
+            <li><a href="ramassage.htm">Ramassage</a></li>
+            <li><a href="liste.html">liste des livraison</a></li>
+            <li><a href="ville_tarif.html">liste des tarifs</a></li>
+            <li><a href="#">Déconnexion</a></li>
+        </ul>
+    </div>
+    <form id="ramassage">
+    <label for="ville_ramassage">Ville de ramassage:</label>
+    <input type="text" id="ville_ramassage" name="ville_ramassage" required><br><br>
+
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" required><br><br>
+
+    <label for="telephone">Téléphone:</label>
+    <input type="tel" id="telephone" name="telephone" required><br><br>
+
+    <label for="adresse">Adresse:</label>
+    <input type="text" id="adresse" name="adresse" required><br><br>
+
+    <label for="nombre_colis">Nombre de colis:</label>
+    <input type="number" id="nombre_colis" name="nombre_colis" required><br><br>
+
+    <input type="submit" id="enregistrerbtn" value="Enregistrer">
+</form>
+    <script src="ramassage.js"></script>
+</body>
+</html>
