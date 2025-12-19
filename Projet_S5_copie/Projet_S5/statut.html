@@ -1,60 +1,46 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarifs de livraison</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statut</title>
 </head>
 <body>
     <div class="sidebar"> 
         <div class="logo">
-            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
+            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
         </div>
+        
         <h3>Menu</h3>
         <ul>
             <li><a href="#">Accueil</a></li>
-            <li><a href="ajouter.html">Ajouter une colis</a></li>
-            <li><a href="ramassage.htm">Ramassage</a></li>
+            <li><a href="ajouter.html">Ajouter un colis</a></li>
+            <li><a href="ramassage.html">Ramassage</a></li>
             <li><a href="liste.html">Liste des livraisons</a></li>
             <li><a href="ville_tarif.html">Liste des tarifs</a></li>
             <li><a href="statut.html">Statut</a></li>
             <li><a href="#">Déconnexion</a></li>
         </ul>
-    </div>
+    </div> 
 
     <div class="main-content">
-        <h2>Tarifs de livraison – Grandes villes du Maroc</h2>
-        <table>
+        <h2>Gestion des Statuts</h2>
+        <table id="dataTable">
             <thead>
                 <tr>
-                    <th>Ville</th>
-                    <th>Tarif Standard</th>
-                    <th>Tarif Express</th>
+                    <th>Code</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Casablanca</td><td>25 MAD</td><td>40 MAD</td></tr>
-                <tr><td>Rabat</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Marrakech</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Fès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Tanger</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Agadir</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Oujda</td><td>45 MAD</td><td>60 MAD</td></tr>
-                <tr><td>Meknès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Kenitra</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>El Jadida</td><td>32 MAD</td><td>47 MAD</td></tr>
-                <tr><td>Nador</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Settat</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>Mohammedia</td><td>26 MAD</td><td>41 MAD</td></tr>
-                <tr><td>Laâyoune</td><td>60 MAD</td><td>80 MAD</td></tr>
-                <tr><td>Dakhla</td><td>70 MAD</td><td>90 MAD</td></tr>
+                <!-- lignes générées par JS -->
             </tbody>
         </table>
     </div>
 
-    <script src="ville_tarif.js"></script>
+    <script src="statut.js"></script>
 </body>
+
 </html>
 <style>
 * {
@@ -247,11 +233,28 @@ table td {
     font-weight: 500;
 }
 
-table td:nth-child(2),
-table td:nth-child(3) {
-    font-weight: 700;
-    color: #10b981;
-    font-size: 15px;
+/* Style du select Statut */
+table td select {
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    font-size: 14px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+table td select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+table td select:hover {
+    background: #f9fafc;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
 }
 
 /* Responsive */
@@ -276,4 +279,31 @@ table td:nth-child(3) {
         overflow-x: auto;
     }
 }
+
+
+
+/* Statut : En attente */
+.statut-attente {
+  color: #555;
+  font-weight: 600;
+}
+
+/* Statut : En cours */
+.statut-encours {
+  color: orange;
+  font-weight: 700;
+}
+
+/* Statut : Livrée */
+.statut-livree {
+  color: green;
+  font-weight: 700;
+}
+
+/* Statut : Annulée */
+.statut-annulee {
+  color: red;
+  font-weight: 700;
+}
+
   </style>

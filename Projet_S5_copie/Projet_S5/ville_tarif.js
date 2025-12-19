@@ -17,7 +17,3 @@ const tarifsLivraison = {
   "Dakhla": { standard: 70, express: 90 }
 };
 
-// Fonction pour obtenir les tarifs de livraison pour une ville donnée
-function obtenirTarifsVille(ville) {
-    return tarifsLivraison[ville] || null;
-}

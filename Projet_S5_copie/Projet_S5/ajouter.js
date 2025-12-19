@@ -16,6 +16,11 @@ const tarifsLivraison = {
   "Laâyoune": { standard: 60, express: 80 },
   "Dakhla": { standard: 70, express: 90 }
 };
+function genererCodeLivraison() { 
+  let datePart = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 8);
+   let randomPart = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+   return "LIV-" + datePart + "-" + randomPart; 
+  }
 
 // Charger les données existantes
 let data_array = [];
@@ -53,9 +58,11 @@ function ajouter(e) {
   let tarif = tarifsLivraison[villeClient][typeLivraison];
   let montantNet = montantProduits - tarif;
 
+  let codeLivraison = genererCodeLivraison();
   // Création de l’objet colis
   const date = new Date();
   let data = {
+    code: codeLivraison,
     ville_ramassage: villeRamassage,
     ville_client: villeClient,
     type_livraison: typeLivraison,
@@ -66,6 +73,7 @@ function ajouter(e) {
     telephone_client: telephoneClient,
     adresse_client: adresseClient,
     produit: produit,
+    statut: "En attente",
     date: date.toLocaleString()
   };
 

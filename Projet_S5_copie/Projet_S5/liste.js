@@ -8,6 +8,7 @@ tbody.innerHTML = "";
 listeProduits.forEach(produit => {
   let row = document.createElement("tr");
   row.innerHTML = `
+    <td>${produit.code}</td>
     <td>${produit.ville_ramassage}</td>
     <td>${produit.ville_client}</td>
     <td>${produit.type_livraison}</td>
@@ -22,3 +23,4 @@ listeProduits.forEach(produit => {
   `;
   tbody.appendChild(row);
 });
+//localStorage.clear();
