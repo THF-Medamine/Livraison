@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarifs de livraison</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des livraisons</title>
 </head>
 <body>
-    <div class="sidebar"> 
+    <div class="sidebar">
         <div class="logo">
             <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
         </div>
@@ -25,36 +24,21 @@
     </div>
 
     <div class="main-content">
-        <h2>Tarifs de livraison – Grandes villes du Maroc</h2>
-        <table>
+        <h2>Gestion des livraisons</h2>
+        <table id="dataTable">
             <thead>
                 <tr>
-                    <th>Ville</th>
-                    <th>Tarif Standard</th>
-                    <th>Tarif Express</th>
+                    <th>Code</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Casablanca</td><td>25 MAD</td><td>40 MAD</td></tr>
-                <tr><td>Rabat</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Marrakech</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Fès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Tanger</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Agadir</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Oujda</td><td>45 MAD</td><td>60 MAD</td></tr>
-                <tr><td>Meknès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Kenitra</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>El Jadida</td><td>32 MAD</td><td>47 MAD</td></tr>
-                <tr><td>Nador</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Settat</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>Mohammedia</td><td>26 MAD</td><td>41 MAD</td></tr>
-                <tr><td>Laâyoune</td><td>60 MAD</td><td>80 MAD</td></tr>
-                <tr><td>Dakhla</td><td>70 MAD</td><td>90 MAD</td></tr>
+                <!-- Les données seront insérées ici par JS -->
             </tbody>
         </table>
     </div>
 
-    <script src="ville_tarif.js"></script>
+    <script src="modifier.js"></script>
 </body>
 </html>
 <style>
@@ -72,7 +56,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Animation de fond dynamique */
 body::before {
     content: '';
     position: fixed;
@@ -91,7 +74,6 @@ body::before {
     100% { transform: translate(50px, 50px); }
 }
 
-/* Sidebar */
 .sidebar {
     width: 280px;
     background: rgba(255, 255, 255, 0.15);
@@ -105,7 +87,6 @@ body::before {
     box-shadow: 8px 0 32px rgba(0, 0, 0, 0.1);
     z-index: 100;
     overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -172,7 +153,6 @@ body::before {
     transform: translateX(10px);
 }
 
-/* Conteneur principal */
 .main-content {
     margin-left: 280px;
     padding: 40px;
@@ -180,7 +160,6 @@ body::before {
     z-index: 10;
 }
 
-/* Titre */
 h2 {
     color: #ffffff;
     font-size: 32px;
@@ -189,16 +168,9 @@ h2 {
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.8s ease-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Tableau */
-table {
+#dataTable {
     width: 100%;
     background: rgba(255, 255, 255, 0.98);
     border-radius: 25px;
@@ -213,49 +185,84 @@ table {
     to { opacity: 1; transform: translateY(0); }
 }
 
-table thead {
+#dataTable thead {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-table th {
-    padding: 20px 25px;
+#dataTable th {
+    padding: 20px 30px;
     text-align: left;
     color: #ffffff;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
-table tbody tr {
+#dataTable tbody tr {
     border-bottom: 1px solid #e2e8f0;
     transition: all 0.3s ease;
 }
 
-table tbody tr:nth-child(even) {
+#dataTable tbody tr:nth-child(even) {
     background-color: #f7fafc;
 }
 
-table tbody tr:hover {
-    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
-    transform: translateX(-5px);
+#dataTable tbody tr:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, transparent 100%);
 }
 
-table td {
-    padding: 16px 25px;
+#dataTable td {
+    padding: 16px 30px;
     color: #2d3748;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
 }
 
-table td:nth-child(2),
-table td:nth-child(3) {
-    font-weight: 700;
-    color: #10b981;
-    font-size: 15px;
+/* Cellule Actions */
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-/* Responsive */
+/* Boutons d'action */
+.btn-modifier,
+.btn-supprimer {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 10px;
+}
+
+.btn-modifier {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-modifier:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+.btn-supprimer {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.btn-supprimer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 87, 108, 0.5);
+}
+
 @media (max-width: 768px) {
     .sidebar {
         width: 100%;
@@ -267,14 +274,5 @@ table td:nth-child(3) {
         margin-left: 0;
         padding: 20px;
     }
-    
-    h2 {
-        font-size: 22px;
-    }
-    
-    table {
-        display: block;
-        overflow-x: auto;
-    }
 }
-  </style>
+    </style>

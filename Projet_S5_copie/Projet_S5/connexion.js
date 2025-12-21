@@ -26,13 +26,12 @@ loginForm.addEventListener("submit", function(e) {
 
   if (user) {
     alert("✅ Connexion réussie !");
-    loginForm.style.display = "none";
-    connectedZone.style.display = "block";
-    titre.textContent = "Bienvenue " + user.email;
-    usernameSpan.textContent = user.email;
-
-    // Sauvegarder la session (⚡ sessionStorage au lieu de localStorage)
+    
+    // Sauvegarder la session
     sessionStorage.setItem("connectedUser", JSON.stringify(user));
+    
+    // Rediriger vers la page ajouter
+    window.location.href = "ajouter.html";
   } else {
     alert("❌ Email ou mot de passe incorrect !");
   }

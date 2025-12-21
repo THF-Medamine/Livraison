@@ -12,13 +12,14 @@
     </div>
         <h3>Menu</h3>
         <ul>
-            <li><a href="#">Accueil</a></li>
+            <li><a href="index.html">Accueil</a></li>
             <li><a href="ajouter.html">ajouter une colie</a></li>
             <li><a href="ramassage.htm">Ramassage</a></li>
             <li><a href="liste.html">liste des livraison</a></li>
+            <li><a href="modifier.html">Modifier</a></li>
             <li><a href="ville_tarif.html">liste des tarifs</a></li>
             <li><a href="statut.html">Statut</a></li>
-            <li><a href="#">Déconnexion</a></li>
+            <li><a href="deconnexion.html">Déconnexion</a></li>
         </ul>
     </div>
     <div class="inputs">
@@ -260,6 +261,17 @@ body::before {
     background: #ffffff;
     color: #2d3748;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Validation states */
+.invalid {
+    border-color: #e53e3e !important; /* red */
+    box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.08);
+}
+
+.valid {
+    border-color: #38a169 !important; /* green */
+    box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.06);
 }
 
 .inputs input[type="text"]:focus,

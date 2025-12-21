@@ -9,16 +9,358 @@
 <body>
 
     <div class="sidebar">
+        <div class="logo">
+            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
+        </div>
         <h3>Menu</h3>
         <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="ajouter.html">ajouter une colie</a></li>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="ajouter.html">Ajouter une colis</a></li>
             <li><a href="ramassage.htm">Ramassage</a></li>
-            <li><a href="liste.html">liste des livraison</a></li>
-            <li><a href="ville_tarif.html">liste des tarifs</a></li>
-            <li><a href="#">Déconnexion</a></li>
+            <li><a href="liste.html">Liste des livraisons</a></li>
+            <li><a href="modifier.html">Modifier</a></li>
+            <li><a href="ville_tarif.html">Liste des tarifs</a></li>
+            <li><a href="statut.html">Statut</a></li>
+            <li><a href="deconnexion.html">Déconnexion</a></li>
         </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="welcome-container">
+            <h1>Bienvenue sur notre plateforme de livraison</h1>
+            <p class="subtitle">Votre partenaire de confiance pour vos livraisons au Maroc</p>
+            
+            <div class="welcome-features">
+                <div class="feature">
+                    <div class="icon">📦</div>
+                    <h3>Ajouter un colis</h3>
+                    <p>Créez facilement une nouvelle livraison avec tous les détails</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">🚚</div>
+                    <h3>Demander un ramassage</h3>
+                    <p>Planifiez le ramassage de vos colis directement depuis votre adresse</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">📊</div>
+                    <h3>Suivre vos livraisons</h3>
+                    <p>Consultez l'état et l'historique de tous vos colis en temps réel</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">💰</div>
+                    <h3>Tarifs transparents</h3>
+                    <p>Découvrez nos tarifs compétitifs pour toutes les grandes villes</p>
+                </div>
+            </div>
+
+            <div class="welcome-cta">
+                <a href="ajouter.html" class="btn-primary">Commencer maintenant</a>
+                <a href="ville_tarif.html" class="btn-secondary">Voir nos tarifs</a>
+            </div>
+        </div>
     </div>
 
 </body>
 </html>
+<style> 
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animation de fond dynamique */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveBackground 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moveBackground {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(10px);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Welcome Container */
+.welcome-container {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.8s ease-out;
+    max-width: 900px;
+    width: 100%;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-container h1 {
+    color: #2d3748;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-container .subtitle {
+    color: #718096;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+/* Features Grid */
+.welcome-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.feature {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.feature .icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    color: #2d3748;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.feature p {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Call To Action Buttons */
+.welcome-cta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #667eea;
+    border: 2px solid #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.btn-secondary:hover {
+    background: #f7fafc;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .welcome-container {
+        padding: 30px;
+        border-radius: 20px;
+    }
+
+    .welcome-container h1 {
+        font-size: 28px;
+    }
+
+    .welcome-container .subtitle {
+        font-size: 16px;
+    }
+
+    .welcome-features {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-cta {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+</style>
