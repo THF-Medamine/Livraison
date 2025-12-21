@@ -74,7 +74,8 @@ function ajouter(e) {
     adresse_client: adresseClient,
     produit: produit,
     statut: "En attente",
-    date: date.toLocaleString()
+    date: date.toLocaleString(),
+    id: Date.now(),   //crypto.randomUUID();        Identifiant unique
   };
 
   // Ajouter au tableau
@@ -94,4 +95,27 @@ function ajouter(e) {
   // Réinitialiser les champs
   document.querySelectorAll("#ville_ramassage, #ville_client, #type_livraison, #Nom_client, #Montant, #telephone_client, #Adreese_client, #Produit")
     .forEach(input => input.value = "");
+}
+
+
+// modification des champs si id_modif existe
+let id_modifier = JSON.parse(localStorage.getItem("modif_id"));
+if (id_modifier !== null) {
+  console.log("Modification ID:", id_modifier);
+  let produitAModifier = data_array.find(p => p.id === id_modifier);
+  if (produitAModifier) {
+    document.getElementById("ville_ramassage").value = produitAModifier.ville_ramassage;
+    document.getElementById("ville_client").value = produitAModifier.ville_client;
+    document.getElementById("type_livraison").value = produitAModifier.type_livraison;
+    document.getElementById("Nom_client").value = produitAModifier.nom_client;
+    document.getElementById("Montant").value = produitAModifier.montant_produits;
+    document.getElementById("telephone_client").value = produitAModifier.telephone_client;
+    document.getElementById("Adreese_client").value = produitAModifier.adresse_client;
+    document.getElementById("Produit").value = produitAModifier.produit;
+  }
+  // Supprimer l'ID de modification après le chargement
+  localStorage.removeItem("modif_id");
+   let delet = data_array.filter(p => p.id !== id_modifier);
+   localStorage.setItem("produits", JSON.stringify(delet));
+   data_array = delet;
 }
