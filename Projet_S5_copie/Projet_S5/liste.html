@@ -24,6 +24,17 @@
     </div>
 
     <div class="main-content">
+        <div class="filter-container">
+            <label for="statutFilter">Filtrer par statut :</label>
+            <select id="statutFilter">
+                <option value="tous">Tous</option>
+                <option value="en cours">En cours</option>
+                <option value="livrée">Livrée</option>
+                <option value="en attente">En attente</option>
+                <option value="annulée">Annulée</option>
+            </select>
+        </div>
+
         <table id="dataTable">
             <thead>
                 <tr>
@@ -39,6 +50,7 @@
                     <th>Adresse</th>
                     <th>Produit</th>
                     <th>Date</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +63,63 @@
 </body>
 </html>
     <style>
+        .filter-container {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-container label {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Select stylisé */
+#statutFilter {
+    padding: 12px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #2d3748;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#statutFilter:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+#statutFilter:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+/* Badges de statut */
+.badge-statut {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.badge-inconnu {
+    background: #cbd5e0;
+    color: #4a5568;
+}
+
+
 * {
     margin: 0;
     padding: 0;
