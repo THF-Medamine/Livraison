@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des livraisons</title>
+    <title data-i18n="title">Modifier la livraison</title>
+    <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo">
             <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
         </div>
-        <h3>Menu</h3>
+        <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="ajouter.html">Ajouter une colis</a></li>
-            <li><a href="ramassage.htm">Ramassage</a></li>
-            <li><a href="liste.html">Liste des livraisons</a></li>
-            <li><a href="modifier.html">Modifier</a></li>
-            <li><a href="ville_tarif.html">Liste des tarifs</a></li>
-            <li><a href="statut.html">Statut</a></li>
-            <li><a href="deconnexion.html">Déconnexion</a></li>
+            <li><a href="index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="ajouter.html" data-i18n="add">Ajouter une colis</a></li>
+            <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
+            <li><a href="liste.html" data-i18n="list">Liste des livraisons</a></li>
+            <li><a href="modifier.html" data-i18n="modify">Modifier</a></li>
+            <li><a href="ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
+            <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
 
     <div class="main-content">
-        <h2>Gestion des livraisons</h2>
+        <h2 data-i18n="management">Gestion des livraisons</h2>
         <table id="dataTable">
             <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Actions</th>
+                    <th data-i18n="code">Code</th>
+                    <th data-i18n="actions">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +79,10 @@ body::before {
     100% { transform: translate(50px, 50px); }
 }
 
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
 .sidebar {
     width: 280px;
     background: rgba(255, 255, 255, 0.15);
@@ -274,5 +283,84 @@ h2 {
         margin-left: 0;
         padding: 20px;
     }
+}
+/* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
+
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
 }
     </style>

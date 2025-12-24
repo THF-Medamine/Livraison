@@ -5,6 +5,10 @@ body{
      justify-content: center;
      height: 100vh;/*IMPORTANT*/
 }
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
 .index1{
     width: 160px;
     height: 160px;

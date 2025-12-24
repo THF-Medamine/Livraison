@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue</title>
+    <title data-i18n="title">dashboard</title>
     <link rel="stylesheet" href="dashbord.css">
+    <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
  <div class="grid">
@@ -17,14 +22,14 @@
    
 
      <div class="instruction">      
-       <a href="#" class="test1">dashboard</a>
-       <a href="#" >Ajouter un colis</a>
-       <a href="#">Liste des colis</a>
-       <a href="#">Demander un ramassage</a>
-       <a href="#">Liste des ramassages</a>
-       <a href="#" >Facturation</a>
-       <a href="#">Demande des retours</a>
-       <a href="#">Tarifs</a>
+       <a href="#" class="test1" data-i18n="dashboard" >dashboard</a>
+       <a href="#" data-i18n="add_package">Ajouter un colis</a>
+       <a href="#" data-i18n="list">Liste des colis</a>
+       <a href="#" data-i18n="pickup">Demander un ramassage</a>
+       <a href="#" data-i18n="pickup_list">Liste des ramassages</a>
+       <a href="#" data-i18n="billing">Facturation</a>
+       <a href="#" data-i18n="returns">Demande de retour</a>
+       <a href="#" data-i18n="prices">Tarifs</a>
    </div> 
    
    
@@ -34,12 +39,12 @@
    
   
   <div class="right_backGra">
-     <h2 class="Total_orders" >Total orders</h2>
-     <h2 class="Total_revenu">Total revenu 293924</h2>
-        <h2 class="Tlzrj_sfmoe ">Tlzrj sfmoe </h2>
-     <h2 class="columns">columns</h2>
-     <h2 class="Graph1">Graph1 </h2>
-      <h2 class="Graph2">Graph2</h2>
+     <h2 class="Total_orders" data-i18n="total_orders">Total orders</h2>
+     <h2 class="Total_revenu" data-i18n="total_revenue">Total revenu </h2>
+        <h2 class="Tlzrj_sfmoe " data-i18n="tlzrj_sfmoe">Tlzrj sfmoe </h2>
+     <h2 class="columns" data-i18n="columns">columns</h2>
+     <h2 class="Graph1" data-i18n="graph1">Graph1 </h2>
+      <h2 class="Graph2" data-i18n="graph2">Graph2</h2>
     </div>
 </div>
 </body>

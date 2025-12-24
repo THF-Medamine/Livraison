@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramassage</title>
-
+    <title data-i18n="pickup">Ramassage</title>
+<script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
     
@@ -13,37 +17,38 @@
         <div class="logo">
        <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
     </div>
-        
-        <h3>Menu</h3>
+
+        <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="ajouter.html">ajouter une colie</a></li>
-            <li><a href="ramassage.htm">Ramassage</a></li>
-            <li><a href="liste.html">liste des livraison</a></li>
-            <li><a href="modifier.html">Modifier</a></li>
-            <li><a href="ville_tarif.html">liste des tarifs</a></li>
-            <li><a href="statut.html">Statut</a></li>
-            <li><a href="deconnexion.html">Déconnexion</a></li>
+            <li><a href="index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="ajouter.html" data-i18n="add">ajouter une colie</a></li>
+            <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
+            <li><a href="liste.html" data-i18n="list">liste des livraison</a></li>
+            <li><a href="modifier.html" data-i18n="modify">Modifier</a></li>
+            <li><a href="ville_tarif.html" data-i18n="prices">liste des tarifs</a></li>
+            <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
+    <div class="main-content">
     <form id="ramassage">
-    <label for="ville_ramassage">Ville de ramassage:</label>
+    <label for="ville_ramassage" data-i18n="pickup_city">Ville de ramassage:</label>
     <input type="text" id="ville_ramassage" name="ville_ramassage" required><br><br>
 
-    <label for="nom">Nom:</label>
+    <label for="nom" data-i18n="client_name">Nom:</label>
     <input type="text" id="nom" name="nom" required><br><br>
 
-    <label for="telephone">Téléphone:</label>
+    <label for="telephone" data-i18n="phone_client">Téléphone:</label>
     <input type="tel" id="telephone" name="telephone" required><br><br>
 
-    <label for="adresse">Adresse:</label>
-    <input type="text" id="adresse" name="adresse" required><br><br>
-
-    <label for="nombre_colis">Nombre de colis:</label>
+    <label for="adresse_client" data-i18n="address_client">Adresse:</label>
+    <input type="text" id="adresse_client" name="adresse_client" required><br><br>
+    <label for="nombre_colis" data-i18n="number_of_packages">Nombre de colis:</label>
     <input type="number" id="nombre_colis" name="nombre_colis" required><br><br>
 
-    <input type="submit" id="enregistrerbtn" value="Enregistrer">
+    <input type="submit" id="enregistrerbtn" data-i18n="save" value="Enregistrer">
 </form>
+</div>
     <script src="ramassage.js"></script>
 </body>
 </html>
@@ -62,7 +67,10 @@ body {
     position: relative;
     overflow-x: hidden;
 }
-
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
 /* Animation de fond dynamique */
 body::before {
     content: '';
@@ -81,7 +89,10 @@ body::before {
     0% { transform: translate(0, 0); }
     100% { transform: translate(50px, 50px); }
 }
-
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
 /* Sidebar avec effet glassmorphism */
 .sidebar {
     width: 280px;
@@ -354,5 +365,84 @@ body::before {
     body {
         flex-direction: column;
     }
+}
+/* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
+
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
 }
 </style>

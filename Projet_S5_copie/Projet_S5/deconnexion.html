@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Déconnexion</title>
+    <title data-i18n="title">Déconnexion</title>
+    <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
   <div class="container">
-    <h2>Déconnexion</h2>
-    <p id="message">Vous êtes en train de vous déconnecter...</p>
+    <h2 data-i18n="logout">Déconnexion</h2>
+    <p id="message" data-i18n="logout_message">Vous êtes en train de vous déconnecter...</p>
   </div>
 
   <script src="deconnexion.js"></script>
@@ -96,3 +101,89 @@
   </style>
 </body>
 </html>
+
+<style>
+  /* Mode sombre */
+.dark-mode {
+  background: black ;
+}
+/* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
+
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+</style>

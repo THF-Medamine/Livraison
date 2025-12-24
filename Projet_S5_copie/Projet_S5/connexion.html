@@ -2,25 +2,30 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion</title>
+    <title data-i18n="title">Connexion</title>
+    <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
   <div class="container">
-    <h2 id="titre">Veuillez vous connecter</h2>
+    <h2 id="titre" data-i18n="titre">Veuillez vous connecter</h2>
 
     <form id="loginForm">
-      <label>Email :</label>
+      <label data-i18n="email">Email :</label>
       <input type="email" id="email" required>
 
-      <label>Mot de passe :</label>
+      <label data-i18n="password">Mot de passe :</label>
       <input type="password" id="password" required>
 
-      <button type="submit">Se connecter</button>
+      <button type="submit" data-i18n="login">Se connecter</button>
     </form>
 
     <div id="connectedZone" style="display:none;">
-      <p>Connecté en tant que <span id="username"></span></p>
-      <button id="logoutBtn">Se déconnecter</button>
+      <p data-i18n="connect_user" >Connecté en tant que <span  id="username"></span></p>
+      <button id="logoutBtn" data-i18n="logout">Se déconnecter</button>
     </div>
   </div>
 
@@ -64,6 +69,10 @@ body::before {
     100% { transform: translate(50px, 50px); }
 }
 
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
 /* Conteneur principal centré */
 .container {
     background: rgba(255, 255, 255, 0.15);
@@ -178,5 +187,83 @@ button:hover {
         font-size: 22px;
     }
 }
+/* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
 
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
 </style>

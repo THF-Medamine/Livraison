@@ -3,54 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des livraisons</title>
+    <title data-i18n="title">Liste des livraisons</title>
+    <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo">
             <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
         </div>
-        <h3>Menu</h3>
+        <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="ajouter.html">Ajouter une colis</a></li>
-            <li><a href="ramassage.htm">Ramassage</a></li>
-            <li><a href="liste.html">Liste des livraisons</a></li>
-            <li><a href="modifier.html">Modifier</a></li>
-            <li><a href="ville_tarif.html">Liste des tarifs</a></li>
-            <li><a href="statut.html">Statut</a></li>
-            <li><a href="deconnexion.html">Déconnexion</a></li>
+            <li><a href="index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="ajouter.html" data-i18n="add">Ajouter une colis</a></li>
+            <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
+            <li><a href="liste.html" data-i18n="list">Liste des livraisons</a></li>
+            <li><a href="modifier.html" data-i18n="modify">Modifier</a></li>
+            <li><a href="ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
+            <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
 
     <div class="main-content">
         <div class="filter-container">
-            <label for="statutFilter">Filtrer par statut :</label>
+            <label for="statutFilter" data-i18n="filter_by_status">Filtrer par statut :</label>
             <select id="statutFilter">
-                <option value="tous">Tous</option>
-                <option value="en cours">En cours</option>
-                <option value="livrée">Livrée</option>
-                <option value="en attente">En attente</option>
-                <option value="annulée">Annulée</option>
+                <option value="tous" data-i18n="all">Tous</option>
+                <option value="en cours" data-i18n="in_progress">En cours</option>
+                <option value="livrée" data-i18n="delivered">Livrée</option>
+                <option value="en attente" data-i18n="pending">En attente</option>
+                <option value="annulée" data-i18n="cancelled">Annulée</option>
             </select>
         </div>
 
         <table id="dataTable">
             <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Ville ramassage</th>
-                    <th>Ville client</th>
-                    <th>Type livraison</th>
-                    <th>Nom client</th>
-                    <th>Montant Produit</th>
-                    <th>Tarif livraison</th>
-                    <th>Montant Net</th>
-                    <th>Téléphone</th>
-                    <th>Adresse</th>
-                    <th>Produit</th>
-                    <th>Date</th>
-                    <th>Statut</th>
+                    <th data-i18n="code">Code</th>
+                    <th data-i18n="pickup_city">Ville ramassage</th>
+                    <th data-i18n="client_city">Ville client</th>
+                    <th data-i18n="delivery_type">Type livraison</th>
+                    <th data-i18n="client_name">Nom client</th>
+                    <th data-i18n="product_amount">Montant Produit</th>
+                    <th data-i18n="delivery_fee">Tarif livraison</th>
+                    <th data-i18n="net_amount">Montant Net</th>
+                    <th data-i18n="phone">Téléphone</th>
+                    <th data-i18n="address">Adresse</th>
+                    <th data-i18n="product">Produit</th>
+                    <th data-i18n="date">Date</th>
+                    <th data-i18n="status">Statut</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,6 +81,11 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+/* Mode sombre */
+.dark-mode {
+  background: black ;
 }
 
 /* Select stylisé */
@@ -340,4 +350,84 @@ table td:nth-child(3) {
     }
 }
 table td { padding: 16px 25px; color: #2d3748; font-size: 14px; font-weight: 500; }
+/* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
+
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
   </style>

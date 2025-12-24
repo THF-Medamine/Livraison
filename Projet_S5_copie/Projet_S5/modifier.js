@@ -1,8 +1,89 @@
+ /* TRANSLATIONS*/
+const translations = {
+  fr: {
+    title: "Modifier la livraison",
+    menu: "Menu",
+    home: "Accueil",
+    add: "Ajouter une livraison",
+    pickup: "Ramassage",
+    list: "Liste des livraisons",
+    prices: "Tarifs de livraison",
+    status: "Statut",
+    modify: "Modifier",
+    logout: "Déconnexion",
+    management: "Gestion des livraisons",
+    code: "Code",
+    actions: "Actions",
+  },
+  en: { 
+    title: "Modify Delivery",
+    menu: "Menu",
+    home: "Home",
+    add: "Add Delivery",
+    pickup: "Pickup",
+    list: "Delivery List",
+    prices: "Delivery Rates",
+    status: "Status",
+    modify: "Modify",
+    logout: "Logout",
+    management: "Delivery Management",
+    code: "Code",
+    actions: "Actions",
+  },
+  ar: {
+    title: "تعديل التسليم",
+    menu: "القائمة",
+    home: "الصفحة الرئيسية",
+    add: "إضافة تسليم",
+    pickup: "الاستلام",
+    list: "قائمة التسليم",
+    prices: "أسعار التسليم",
+    status: "الحالة",
+    modify: "تعديل",
+    logout: "تسجيل الخروج",
+    management: "إدارة التسليم",
+    code: "الرمز",
+    actions: "الإجراءات",
+  }
+};
+/* APPLY LANGUAGE */
+function applyLanguage() {
+  const lang = localStorage.getItem("language") || "fr";
+
+  // text
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = translations[lang][key] || key;
+  });
+
+  // value (button, input)
+  document.querySelectorAll("[data-i18n-value]").forEach(el => {
+    const key = el.dataset.i18nValue;
+    el.value = translations[lang][key] || key;
+  });
+
+ if (lang === "ar") {
+    document.documentElement.dir = "rtl";
+    document.body.classList.add("rtl");
+  } else {
+    document.documentElement.dir = "ltr";
+    document.body.classList.remove("rtl");
+  }
+}
+
+applyLanguage();
+
+ //DARK | LIGHT MODE 
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+} 
+
 let listeProduits = JSON.parse(localStorage.getItem("produits")) || [];
 
 let tbody = document.querySelector("#dataTable tbody");
 
-tbody.innerHTML = ""; 
 
 listeProduits.forEach(produit => {
   let row = document.createElement("tr");

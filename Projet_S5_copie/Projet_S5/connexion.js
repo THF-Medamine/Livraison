@@ -1,3 +1,69 @@
+  /* TRANSLATIONS*/
+const translations = {
+  fr: {
+    title: "Connexion",
+    titre: "Veuillez vous connecter",
+    email: "Email",
+    password: "Mot de passe",
+    login: "Se connecter",
+    connect_user: "Connecté en tant que",
+    lougout: "Se déconnecter",
+  },
+  en: {
+    title: "login",
+     titre: "complete your login",
+    email: "Email",
+    password: "Password",
+    login: "Se connecter",
+    connect_user: "Connected as",
+    lougout: "Logout",
+  },
+  ar: {
+    title: "تسجيل الدخول",
+    titre: "الرجاء تسجيل الدخول",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    login: "تسجيل الدخول",
+    connect_user: "متصل باسم",
+    lougout: "تسجيل الخروج"
+  }
+};
+/* APPLY LANGUAGE */
+function applyLanguage() {
+  const lang = localStorage.getItem("language") || "fr";
+
+  // text
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = translations[lang][key] || key;
+  });
+
+  // value (button, input)
+  document.querySelectorAll("[data-i18n-value]").forEach(el => {
+    const key = el.dataset.i18nValue;
+    el.value = translations[lang][key] || key;
+  });
+
+ if (lang === "ar") {
+    document.documentElement.dir = "rtl";
+    document.body.classList.add("rtl");
+  } else {
+    document.documentElement.dir = "ltr";
+    document.body.classList.remove("rtl");
+  }
+}
+
+
+applyLanguage();
+
+ //DARK | LIGHT MODE 
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+} 
+
+
 // Liste des utilisateurs autorisés
 const users = [
   { email: "admin@app.com", password: "admin123" },
