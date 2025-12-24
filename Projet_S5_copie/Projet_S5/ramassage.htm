@@ -24,7 +24,6 @@
             <li><a href="ajouter.html" data-i18n="add">ajouter une colie</a></li>
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">liste des livraison</a></li>
-            <li><a href="modifier.html" data-i18n="modify">Modifier</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">liste des tarifs</a></li>
             <li><a href="statut.html" data-i18n="status">Statut</a></li>
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
@@ -49,6 +48,26 @@
     <input type="submit" id="enregistrerbtn" data-i18n="save" value="Enregistrer">
 </form>
 </div>
+    <section class="list-section" style="margin-left:340px; margin-right:50px; margin-top:20px; z-index:10;">
+        <h2 style="color:#ffffff; text-transform:uppercase; text-align:left; margin-bottom:15px;">Liste des ramassages</h2>
+        <div class="table-wrapper" style="background:rgba(255,255,255,0.98); border-radius:12px; padding:12px;">
+            <table id="ramassageTable" style="width:100%; border-collapse:collapse;">
+                <thead>
+                    <tr style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff;">
+                        <th style="padding:10px; text-align:left;">Ville</th>
+                        <th style="padding:10px; text-align:left;">Nom</th>
+                        <th style="padding:10px; text-align:left;">Téléphone</th>
+                        <th style="padding:10px; text-align:left;">Adresse</th>
+                        <th style="padding:10px; text-align:left;">Nb colis</th>
+                        <th style="padding:10px; text-align:left;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ramassageTbody">
+                    <!-- rows insérées par JS -->
+                </tbody>
+            </table>
+        </div>
+    </section>
     <script src="ramassage.js"></script>
 </body>
 </html>

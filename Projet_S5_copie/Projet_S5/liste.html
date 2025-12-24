@@ -21,7 +21,6 @@
             <li><a href="ajouter.html" data-i18n="add">Ajouter une colis</a></li>
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">Liste des livraisons</a></li>
-            <li><a href="modifier.html" data-i18n="modify">Modifier</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
             <li><a href="statut.html" data-i18n="status">Statut</a></li>
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
@@ -40,28 +39,31 @@
             </select>
         </div>
 
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th data-i18n="code">Code</th>
-                    <th data-i18n="pickup_city">Ville ramassage</th>
-                    <th data-i18n="client_city">Ville client</th>
-                    <th data-i18n="delivery_type">Type livraison</th>
-                    <th data-i18n="client_name">Nom client</th>
-                    <th data-i18n="product_amount">Montant Produit</th>
-                    <th data-i18n="delivery_fee">Tarif livraison</th>
-                    <th data-i18n="net_amount">Montant Net</th>
-                    <th data-i18n="phone">Téléphone</th>
-                    <th data-i18n="address">Adresse</th>
-                    <th data-i18n="product">Produit</th>
-                    <th data-i18n="date">Date</th>
-                    <th data-i18n="status">Statut</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Les données seront insérées ici par JS -->
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th data-i18n="code">Code</th>
+                        <th data-i18n="pickup_city">Ville ramassage</th>
+                        <th data-i18n="client_city">Ville client</th>
+                        <th data-i18n="delivery_type">Type livraison</th>
+                        <th data-i18n="client_name">Nom client</th>
+                        <th data-i18n="product_amount">Montant Produit</th>
+                        <th data-i18n="delivery_fee">Tarif livraison</th>
+                        <th data-i18n="net_amount">Montant Net</th>
+                        <th data-i18n="phone">Téléphone</th>
+                        <th data-i18n="address">Adresse</th>
+                        <th data-i18n="product">Produit</th>
+                        <th data-i18n="date">Date</th>
+                        <th data-i18n="status">Statut</th>
+                        <th data-i18n="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les données seront insérées ici par JS -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="liste.js"></script>
@@ -269,13 +271,39 @@ h2 {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Wrapper pour le scroll horizontal */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 25px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.8s ease-out;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
 /* Tableau */
 table {
     width: 100%;
+    min-width: 100%;
     background: rgba(255, 255, 255, 0.98);
-    border-radius: 25px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
     border-collapse: collapse;
     animation: slideUp 0.8s ease-out;
 }
@@ -325,6 +353,51 @@ table td:nth-child(3) {
     font-weight: 700;
     color: #2d3748;
     font-size: 15px;
+}
+
+/* Cellule Actions */
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Boutons d'action */
+.btn-modifier,
+.btn-supprimer {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.btn-modifier {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-modifier:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+.btn-supprimer {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.btn-supprimer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 87, 108, 0.5);
 }
 
 /* Responsive */

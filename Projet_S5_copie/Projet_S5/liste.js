@@ -31,7 +31,9 @@ const translations = {
     address: "Adresse",
     product: "Produit",
     date: "Date",
-    status: "Statut"
+    status: "Statut",
+    actions: "Actions",
+    delete: "Supprimer"
   },
   en: { 
     title: "Delivery List",
@@ -63,6 +65,8 @@ const translations = {
     product: "Product",
     date: "Date",
     status: "Status",
+    actions: "Actions",
+    delete: "Delete"
   },
   ar: {
     title: "قائمة التسليمات",
@@ -94,6 +98,8 @@ const translations = {
     product: "المنتج",
     date: "التاريخ",
     status: "الحالة",
+    actions: "الإجراءات",
+    delete: "حذف"
   }
 };
 /* APPLY LANGUAGE */
@@ -151,7 +157,7 @@ function afficherLivraisons(filtreStatut) {
   
   // Afficher les livraisons filtrées
   if (livraisonsFiltrees.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:40px; color:#a0aec0;">Aucune livraison avec ce statut</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="14" style="text-align:center; padding:40px; color:#a0aec0;">Aucune livraison avec ce statut</td></tr>';
   } else {
     livraisonsFiltrees.forEach(produit => {
       let row = document.createElement("tr");
@@ -170,6 +176,44 @@ function afficherLivraisons(filtreStatut) {
         <td>${produit.date}</td>
         <td><span class="badge-statut badge-${(produit.statut || 'inconnu').toLowerCase().replace(' ', '-')}">${produit.statut || 'N/A'}</span></td>
       `;
+      
+      // Colonne Actions
+      let td = document.createElement("td");
+      td.className = "actions-cell";
+      
+      // Bouton Modifier
+      let modifierButton = document.createElement("button");
+      modifierButton.className = "btn-modifier";
+      const lang = localStorage.getItem("language") || "fr";
+      modifierButton.textContent = translations[lang]["modify"] || "Modifier";
+      modifierButton.addEventListener("click", () => {
+        localStorage.setItem("modif_id", JSON.stringify(produit.id));
+        window.location.href = "ajouter.html";    
+      });
+      td.appendChild(modifierButton);
+      
+      // Bouton Supprimer
+      let deleteButton = document.createElement("button");
+      deleteButton.className = "btn-supprimer";
+      deleteButton.textContent = translations[lang]["delete"] || "Supprimer";
+      deleteButton.addEventListener("click", () => {
+        try {
+          let userConfirmed = confirm("This element will be deleted.\n Are you sure?");
+          
+          if (userConfirmed) {
+            listeProduits = listeProduits.filter(p => p !== produit);
+            localStorage.setItem("produits", JSON.stringify(listeProduits));
+            afficherLivraisons(statutFilter.value);
+          } else {
+            alert("This element will not be deleted.");
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      });
+      td.appendChild(deleteButton);
+      
+      row.appendChild(td);
       tbody.appendChild(row);
     });
   }
@@ -182,3 +226,4 @@ afficherLivraisons("tous");
 statutFilter.addEventListener("change", function() {
   afficherLivraisons(this.value);
 });
+//localStorage.clear();
