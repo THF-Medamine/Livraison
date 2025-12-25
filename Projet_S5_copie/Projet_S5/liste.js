@@ -145,7 +145,7 @@ let statutFilter = document.querySelector("#statutFilter");
 // Fonction pour afficher les livraisons selon le filtre
 function afficherLivraisons(filtreStatut) {
   tbody.innerHTML = "";
-  
+
   // Filtrer selon le statut sélectionné
   let livraisonsFiltrees = listeProduits;
   
@@ -226,4 +226,3 @@ afficherLivraisons("tous");
 statutFilter.addEventListener("change", function() {
   afficherLivraisons(this.value);
 });
-//localStorage.clear();
