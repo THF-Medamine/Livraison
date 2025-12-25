@@ -1,4 +1,4 @@
-    /* TRANSLATIONS*/
+/* TRANSLATIONS */
 const translations = {
   fr: {
     title: "Ramassage",
@@ -11,10 +11,10 @@ const translations = {
     status: "Statut",
     modify: "Modifier",
     logout: "Déconnexion",
-    delivery_prices:"Tarifs de livraison – Grandes villes du Maroc",
+    delivery_prices: "Tarifs de livraison – Grandes villes du Maroc",
     city: "Ville",
     standard_rate: "Tarif Standard",
-    express_rate: "Tarif Express ",
+    express_rate: "Tarif Express",
   },
   en: {
     title: "Pickup",
@@ -27,7 +27,7 @@ const translations = {
     status: "Status",
     modify: "Modify",
     logout: "Logout",
-    delivery_prices:"Delivery Prices – Major Cities in Morocco",
+    delivery_prices: "Delivery Prices – Major Cities in Morocco",
     city: "City",
     standard_rate: "Standard Rate",
     express_rate: "Express Rate",
@@ -43,22 +43,40 @@ const translations = {
     status: "الحالة",
     modify: "تعديل",
     logout: "تسجيل الخروج",
-    delivery_prices:"أسعار التسليم – المدن الكبرى في المغرب",
+    delivery_prices: "أسعار التسليم – المدن الكبرى في المغرب",
     city: "المدينة",
     standard_rate: "السعر العادي",
     express_rate: "السعر السريع",
   }
 };
 
- //DARK | LIGHT MODE 
-
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
+/* DARK MODE */
+if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark-mode");
-} 
+}
 
-// Tableau associatif des tarifs de livraison
-const tarifsLivraison = {
+/* APPLY LANGUAGE */
+function applyLanguage() {
+  const lang = localStorage.getItem("language") || "fr";
+  
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = translations[lang][el.dataset.i18n] || el.dataset.i18n;
+  });
+  
+  document.querySelectorAll("[data-i18n-value]").forEach(el => {
+    el.value = translations[lang][el.dataset.i18nValue] || el.dataset.i18nValue;
+  });
+  
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.body.classList.toggle("rtl", lang === "ar");
+}
+
+applyLanguage();
+
+/* TARIFS MANAGEMENT */
+const STORAGE_KEY = 'tarifs_simple_v1';
+
+const defaultTarifs = {
   "Casablanca": { standard: 25, express: 40 },
   "Rabat": { standard: 30, express: 45 },
   "Marrakech": { standard: 35, express: 50 },
@@ -75,29 +93,144 @@ const tarifsLivraison = {
   "Laâyoune": { standard: 60, express: 80 },
   "Dakhla": { standard: 70, express: 90 }
 };
-/* APPLY LANGUAGE */
-function applyLanguage() {
-  const lang = localStorage.getItem("language") || "fr";
 
-  // text
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    el.textContent = translations[lang][key] || key;
-  });
-
-  // value (button, input)
-  document.querySelectorAll("[data-i18n-value]").forEach(el => {
-    const key = el.dataset.i18nValue;
-    el.value = translations[lang][key] || key;
-  });
-
- if (lang === "ar") {
-    document.documentElement.dir = "rtl";
-    document.body.classList.add("rtl");
-  } else {
-    document.documentElement.dir = "ltr";
-    document.body.classList.remove("rtl");
-  }
+// Get tarifs
+function getTarifs() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : { ...defaultTarifs };
 }
 
-applyLanguage();
+// Save tarifs
+function setTarifs(obj) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+}
+
+// Check if user is admin
+function isAdmin() {
+  const user = sessionStorage.getItem('connectedUser');
+  return user && JSON.parse(user).role === 'admin';
+}
+
+// Render table
+function render() {
+  const tbody = document.getElementById('tarifs-body');
+  if (!tbody) return;
+  
+  tbody.innerHTML = '';
+  const tarifs = getTarifs();
+  const admin = isAdmin();
+  
+  Object.keys(tarifs).sort().forEach(city => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${city}</td>
+      <td>${tarifs[city].standard} MAD</td>
+      <td>${tarifs[city].express} MAD</td>
+      <td>
+        <button class="edit" data-city="${city}" ${!admin ? 'style="display:none"' : ''}>Modifier</button>
+        <button class="del" data-city="${city}" ${!admin ? 'style="display:none"' : ''}>Supprimer</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+    
+    if (admin) {
+      tr.querySelector('.edit').onclick = () => openForEdit(city);
+      tr.querySelector('.del').onclick = () => deleteCity(city);
+    }
+  });
+  
+  const openAdd = document.getElementById('open-add');
+  if (openAdd) openAdd.style.display = admin ? '' : 'none';
+}
+
+// Open edit form
+function openForEdit(city) {
+  if (!isAdmin()) {
+    alert('Action réservée aux administrateurs');
+    return;
+  }
+  
+  const tarifs = getTarifs();
+  document.getElementById('original-city').value = city;
+  document.getElementById('city-input').value = city;
+  document.getElementById('standard-input').value = tarifs[city].standard;
+  document.getElementById('express-input').value = tarifs[city].express;
+  document.getElementById('form-container').style.display = 'block';
+}
+
+// Delete city
+function deleteCity(city) {
+  if (!isAdmin()) {
+    alert('Action réservée aux administrateurs');
+    return;
+  }
+  
+  if (!confirm(`Supprimer ${city} ?`)) return;
+  
+  const tarifs = getTarifs();
+  delete tarifs[city];
+  setTarifs(tarifs);
+  render();
+}
+
+// Save from form
+function saveFromForm(e) {
+  e.preventDefault();
+  
+  if (!isAdmin()) {
+    alert('Action réservée aux administrateurs');
+    return;
+  }
+  
+  const original = document.getElementById('original-city').value;
+  const city = document.getElementById('city-input').value.trim();
+  const standard = Number(document.getElementById('standard-input').value);
+  const express = Number(document.getElementById('express-input').value);
+  
+  if (!city) {
+    alert('Ville requise');
+    return;
+  }
+  
+  if (isNaN(standard) || isNaN(express)) {
+    alert('Tarifs invalides');
+    return;
+  }
+  
+  const tarifs = getTarifs();
+  if (original && original !== city) delete tarifs[original];
+  tarifs[city] = { standard, express };
+  setTarifs(tarifs);
+  
+  document.getElementById('form-container').style.display = 'none';
+  render();
+}
+
+// Show add form
+function showAdd() {
+  if (!isAdmin()) {
+    alert('Action réservée aux administrateurs');
+    return;
+  }
+  
+  document.getElementById('original-city').value = '';
+  document.getElementById('city-input').value = '';
+  document.getElementById('standard-input').value = '';
+  document.getElementById('express-input').value = '';
+  document.getElementById('form-container').style.display = 'block';
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  
+  const openAdd = document.getElementById('open-add');
+  if (openAdd) openAdd.onclick = showAdd;
+  
+  const form = document.getElementById('tarif-form');
+  if (form) form.onsubmit = saveFromForm;
+  
+  const cancel = document.getElementById('cancel-btn');
+  if (cancel) cancel.onclick = () => document.getElementById('form-container').style.display = 'none';
+});
+

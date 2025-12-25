@@ -64,10 +64,10 @@ if (savedTheme === "dark") {
 } 
 
 
-// Liste des utilisateurs autorisés
+// Liste des utilisateurs autorisés (avec rôle)
 const users = [
-  { email: "admin@app.com", password: "admin123" },
-  { email: "user@app.com", password: "user123" }
+  { email: "admin@app.com", password: "admin123", role: "admin" },
+  { email: "user@app.com", password: "user123", role: "user" }
 ];
 
 // Récupération des éléments du DOM
@@ -94,7 +94,8 @@ loginForm.addEventListener("submit", function(e) {
     alert("✅ Connexion réussie !");
     
     // Sauvegarder la session
-    sessionStorage.setItem("connectedUser", JSON.stringify(user));
+    // On stocke email et role dans la session
+    sessionStorage.setItem("connectedUser", JSON.stringify({ email: user.email, role: user.role }));
     
     // Rediriger vers la page ajouter
     window.location.href = "ajouter.html";
@@ -111,6 +112,9 @@ window.onload = function() {
     connectedZone.style.display = "block";
     titre.textContent = "Bienvenue " + savedUser.email;
     usernameSpan.textContent = savedUser.email;
+    // expose role for debugging (optional)
+    const roleSpan = document.getElementById('userRole');
+    if (roleSpan) roleSpan.textContent = savedUser.role || '';
   }
 };
 
