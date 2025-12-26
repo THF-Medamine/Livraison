@@ -81,36 +81,57 @@ if (savedTheme === "dark") {
   document.body.classList.add("dark-mode");
 } 
 
+// Check role from sessionStorage
+const userStr = sessionStorage.getItem('connectedUser');
+const user = userStr ? JSON.parse(userStr) : null;
+const isAdmin = user && user.role === 'admin';
+
+// Get DOM elements
+const dataTable = document.getElementById('dataTable');
 let listeProduits = JSON.parse(localStorage.getItem("produits")) || [];
 let tbody = document.querySelector("#dataTable tbody");
 tbody.innerHTML = "";
 
-listeProduits.forEach((produit, index) => {
-  let row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${produit.code}</td>
-    <td>
-      <select onchange="changerStatut(this, ${index})">
-        <option value="En attente" ${produit.statut === "En attente" ? "selected" : ""}>En attente</option>
-        <option value="En cours" ${produit.statut === "En cours" ? "selected" : ""}>En cours</option>
-        <option value="Livrée" ${produit.statut === "Livrée" ? "selected" : ""}>Livrée</option>
-        <option value="Annulée" ${produit.statut === "Annulée" ? "selected" : ""}>Annulée</option>
-      </select>
-    </td>
-  `;
-  tbody.appendChild(row);
-});
-
-function changerStatut(select, index) {
-  listeProduits[index].statut = select.value;
-  localStorage.setItem("produits", JSON.stringify(listeProduits));
-
+// Hide table if not admin
+if (!isAdmin) {
+  dataTable.style.display = 'none';
+  // Show message instead
+  const container = document.querySelector('.main-content');
+  const msg = document.createElement('p');
+  msg.textContent = 'Cette section est réservée aux administrateurs.';
+  msg.style.color = '#ffffff';
+  msg.style.textAlign = 'center';
+  msg.style.marginTop = '40px';
+  msg.style.fontSize = '16px';
+  container.appendChild(msg);
+} else {
+  // Render table for admin
+  listeProduits.forEach((produit, index) => {
+    let row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${produit.code}</td>
+      <td>
+        <select onchange="changerStatut(this, ${index})">
+          <option value="En attente" ${produit.statut === "En attente" ? "selected" : ""}>En attente</option>
+          <option value="En cours" ${produit.statut === "En cours" ? "selected" : ""}>En cours</option>
+          <option value="Livrée" ${produit.statut === "Livrée" ? "selected" : ""}>Livrée</option>
+          <option value="Annulée" ${produit.statut === "Annulée" ? "selected" : ""}>Annulée</option>
+        </select>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
 }
 
-
-
-
 function changerStatut(select, index) {
+  // Check role permission
+  const userStr = sessionStorage.getItem('connectedUser');
+  const user = userStr ? JSON.parse(userStr) : null;
+  if (!user || user.role !== 'admin') {
+    alert('Action réservée aux administrateurs');
+    return;
+  }
+
   listeProduits[index].statut = select.value;
   localStorage.setItem("produits", JSON.stringify(listeProduits));
 

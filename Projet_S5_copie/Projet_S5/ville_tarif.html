@@ -29,38 +29,46 @@
 
     <div class="main-content">
         <h2 data-i18n="delivery_prices">Tarifs de livraison – Grandes villes du Maroc</h2>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div></div>
+            <button id="open-add" style="padding:8px 12px;border-radius:8px;border:none;background:#10b981;color:white;cursor:pointer;">Ajouter / Modifier</button>
+        </div>
+
         <table>
             <thead>
                 <tr>
                     <th data-i18n="city">Ville</th>
                     <th data-i18n="standard_rate">Tarif Standard</th>
                     <th data-i18n="express_rate">Tarif Express</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr><td>Casablanca</td><td>25 MAD</td><td>40 MAD</td></tr>
-                <tr><td>Rabat</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Marrakech</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Fès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Tanger</td><td>35 MAD</td><td>50 MAD</td></tr>
-                <tr><td>Agadir</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Oujda</td><td>45 MAD</td><td>60 MAD</td></tr>
-                <tr><td>Meknès</td><td>30 MAD</td><td>45 MAD</td></tr>
-                <tr><td>Kenitra</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>El Jadida</td><td>32 MAD</td><td>47 MAD</td></tr>
-                <tr><td>Nador</td><td>40 MAD</td><td>55 MAD</td></tr>
-                <tr><td>Settat</td><td>28 MAD</td><td>42 MAD</td></tr>
-                <tr><td>Mohammedia</td><td>26 MAD</td><td>41 MAD</td></tr>
-                <tr><td>Laâyoune</td><td>60 MAD</td><td>80 MAD</td></tr>
-                <tr><td>Dakhla</td><td>70 MAD</td><td>90 MAD</td></tr>
+            <tbody id="tarifs-body">
+                <!-- Lignes générées par JavaScript -->
             </tbody>
         </table>
+
+        <div id="form-container" style="margin-top:20px;display:none;background:rgba(255,255,255,0.95);padding:16px;border-radius:12px;">
+            <form id="tarif-form">
+                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                    <input id="city-input" placeholder="Ville" style="padding:8px;border-radius:8px;border:1px solid #ccc;min-width:180px;" required />
+                    <input id="standard-input" placeholder="Tarif Standard (MAD)" type="number" style="padding:8px;border-radius:8px;border:1px solid #ccc;min-width:160px;" required />
+                    <input id="express-input" placeholder="Tarif Express (MAD)" type="number" style="padding:8px;border-radius:8px;border:1px solid #ccc;min-width:160px;" required />
+                    <input type="hidden" id="original-city" />
+                    <button id="save-btn" style="padding:8px 12px;border-radius:8px;border:none;background:#667eea;color:white;cursor:pointer;">Enregistrer</button>
+                    <button id="cancel-btn" type="button" style="padding:8px 12px;border-radius:8px;border:1px solid #bbb;background:white;cursor:pointer;">Annuler</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="ville_tarif.js"></script>
 </body>
 </html>
 <style>
+
+    
 * {
     margin: 0;
     padding: 0;
@@ -260,6 +268,41 @@ table td:nth-child(3) {
     font-weight: 700;
     color: #10b981;
     font-size: 15px;
+}
+
+/* Buttons: Edit & Delete */
+button.edit,
+button.del {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+button.edit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 6px 18px rgba(102,126,234,0.18);
+}
+
+button.edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(102,126,234,0.22);
+}
+
+button.del {
+    background: #fff;
+    color: #c0392b;
+    border: 1px solid rgba(192, 57, 43, 0.12);
+}
+
+button.del:hover {
+    background: #fff5f5;
+    transform: translateY(-2px);
 }
 
 /* Responsive */

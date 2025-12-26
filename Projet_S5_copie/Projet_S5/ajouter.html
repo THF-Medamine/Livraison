@@ -20,12 +20,13 @@
  </div>
         <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="index.html"  data-i18n="home">Accueil</a></li>
             <li><a href="ajouter.html" data-i18n="add">ajouter une colie</a></li>
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">liste des livraison</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">liste des tarifs</a></li>
             <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="black_liste.html" data-i18n="black_liste" class="admin-only">Black_liste</a></li>
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
@@ -253,7 +254,9 @@ body::before {
     position: relative;
     overflow: hidden;
 }
-
+.admin .sidebar ul li .admin-only{
+    display: none;
+}
 .sidebar ul li a::before {
     content: '';
     position: absolute;

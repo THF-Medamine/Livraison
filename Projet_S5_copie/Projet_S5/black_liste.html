@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacklist - Gestion des Numéros</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>📵 Blacklist</h1>
+        
+        <div class="form-group">
+            <input type="text" id="numeroInput" placeholder="Entrez un numéro de téléphone..." autocomplete="off">
+            <button class="btn-add" onclick="ajouterNumero()">Ajouter</button>
+        </div>
+
+        <div class="liste-container" id="listeContainer">
+            <div class="liste-vide">Aucun numéro ajouté</div>
+        </div>
+
+        <div class="count">
+            Total: <span id="countNumeros">0</span> numéro(s)
+        </div>
+    </div>
+
+    <!-- Modal pour modifier -->
+    <div class="modal" id="modalModifier">
+        <div class="modal-content">
+            <h2>Modifier le numéro</h2>
+            <input type="text" id="modalInput" placeholder="Entrez le nouveau numéro...">
+            <div class="modal-actions">
+                <button class="btn-confirmer" onclick="confirmerModification()">Confirmer</button>
+                <button class="btn-annuler" onclick="fermerModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="black_liste.js"></script>
+</body>
+</html>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-add {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .liste-container {
+            margin-top: 20px;
+        }
+
+        .liste-vide {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        .numero-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .numero-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-modifier, .btn-supprimer {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-modifier {
+            background: #ffc107;
+            color: white;
+        }
+
+        .btn-modifier:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .btn-supprimer {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-supprimer:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-confirmer, .btn-annuler {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-confirmer {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-confirmer:hover {
+            background: #5568d3;
+        }
+
+        .btn-annuler {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-annuler:hover {
+            background: #ccc;
+        }
+
+        .count {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>

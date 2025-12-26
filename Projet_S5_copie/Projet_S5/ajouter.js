@@ -1,3 +1,10 @@
+//matnfach traduction dyal balck _liste
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="admin"){
+  document.body.classList.add("admin");
+
+}
+
+
 // Tableau des tarifs par ville et type
 const tarifsLivraison = {
   "Casablanca": { standard: 25, express: 40 },
@@ -21,6 +28,7 @@ function genererCodeLivraison() {
    let randomPart = Math.random().toString(36).substring(2, 8).toUpperCase(); 
    return "LIV-" + datePart + "-" + randomPart; 
   }
+  
  //DARK | LIGHT MODE 
 
 const savedTheme = localStorage.getItem("theme");
