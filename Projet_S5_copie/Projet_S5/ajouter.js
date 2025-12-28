@@ -1,5 +1,4 @@
-//matnfach traduction dyal balck _liste
-if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="admin"){
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
   document.body.classList.add("admin");
 
 }
@@ -47,6 +46,7 @@ const translations = {
     list: "Liste des livraisons",
     prices: "Liste des tarifs",
     status: "Statut",
+    Black_liste: "Liste noire",
     modify: "Modifier",
     logout: "Déconnexion",
     pickup_city: "Ville de ramassage",
@@ -61,7 +61,6 @@ const translations = {
     standard: "Standard",
     express: "Express",
     save: "Enregistrer",
-
     fill_all_fields: "Veuillez remplir tous les champs",
     city_not_found: "Ville non trouvée dans la liste des tarifs",
     success: "Succès",
@@ -81,6 +80,7 @@ const translations = {
     list: "Deliveries list",
     prices: "Prices list",
     status: "Status",
+    Black_liste: "Black List",
     modify: "Modify",
     logout: "Logout",
     pickup_city: "Pickup city",
@@ -95,7 +95,6 @@ const translations = {
     standard: "Standard",
     express: "Express",
     save: "Save",
-
     fill_all_fields: "Please fill all fields",
     city_not_found: "City not found in price list",
     success: "Success",
@@ -114,6 +113,7 @@ const translations = {
     list: "لائحة التوصيلات",
     prices: "لائحة الأسعار",
     status: "الحالة",
+    Black_liste : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
     pickup_city: "مدينة الاستلام",
@@ -174,7 +174,6 @@ function t(key) {
 }
 
 function showPopup(type, message) {
-  console.log("fs");
   const popup = document.getElementById("popup");
   document.getElementById("popup-title").textContent =
     type === "error" ? t("error") : t("success");
@@ -209,6 +208,7 @@ function ajouter(e) {
   let adresseClient = document.getElementById("Adreese_client").value.trim();
   let produit = document.getElementById("Produit").value.trim();
 
+  
   // Vérification si un champ est vide
   if (!villeRamassage || !villeClient || !typeLivraison || !nomClient || !montantProduits || !telephoneClient || !adresseClient || !produit) {
 showPopup("error", t("fill_all_fields"));
@@ -219,8 +219,17 @@ return;
   if (!tarifsLivraison[villeClient]) {
     showPopup("error", t("city_not_found"));
 return;
-
   }
+  
+let telephone_client = document.getElementById("telephone_client");
+  let numero = telephone_client.value.trim();
+   let numeros = JSON.parse(localStorage.getItem('blacklist')) || [];
+    
+    if (numeros.includes(numero)) {
+        showPopup("error", t("Ce numéro est dans la liste noire !!"));
+        telephone_client.focus();
+        return;
+    }
 
   // Récupérer le tarif selon ville et type
   let tarif = tarifsLivraison[villeClient][typeLivraison];
@@ -259,7 +268,8 @@ showPopup(
   t("city") + ": " + villeClient + "\n" +
   t("type") + ": " + t(typeLivraison) + "\n" +
   t("net_amount") + ": " + montantNet + " MAD"
-);
+)
+;
 
 
   // Réinitialiser les champs

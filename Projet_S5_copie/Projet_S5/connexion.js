@@ -70,6 +70,28 @@ const users = [
   { email: "user@app.com", password: "user123", role: "user" }
 ];
 
+/* POPUP*/
+function t(key) {
+  const lang = localStorage.getItem("language") || "fr";
+  return translations[lang][key] || key;
+}
+
+function showPopup(type, message) {
+  const popup = document.getElementById("popup");
+  document.getElementById("popup-title").textContent =
+    type === "error" ? t("error") : t("success");
+  document.getElementById("popup-message").textContent = message;
+  document.getElementById("popup-btn").textContent = t("popup_ok");
+  popup.classList.remove("hidden");
+}
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+document.getElementById("popup-btn").onclick = closePopup;
+document.getElementById("popup-close").onclick = closePopup;
+
+
 // Récupération des éléments du DOM
 const loginForm = document.getElementById("loginForm");
 const connectedZone = document.getElementById("connectedZone");
@@ -91,8 +113,8 @@ loginForm.addEventListener("submit", function(e) {
   const user = users.find(u => u.email === email && u.password === password);
 
   if (user) {
-    alert("✅ Connexion réussie !");
-    
+      showPopup("error", t("✅ Connexion réussie !"));
+
     // Sauvegarder la session
     // On stocke email et role dans la session
     sessionStorage.setItem("connectedUser", JSON.stringify({ email: user.email, role: user.role }));
@@ -100,9 +122,10 @@ loginForm.addEventListener("submit", function(e) {
     // Rediriger vers la page ajouter
     window.location.href = "ajouter.html";
   } else {
-    alert("❌ Email ou mot de passe incorrect !");
+          showPopup("error", t("❌ Email ou mot de passe incorrect !"));
   }
 });
+
 
 // Vérifier si un utilisateur est déjà connecté (dans sessionStorage)
 window.onload = function() {

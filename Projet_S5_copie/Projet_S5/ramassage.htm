@@ -25,7 +25,8 @@
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">liste des livraison</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">liste des tarifs</a></li>
-            <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="statut.html" data-i18n="status" class="admin_only">Statut</a></li>
+           <li><a href="black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
@@ -228,6 +229,9 @@ body::before {
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
+}
+.admin .sidebar ul li .admin_only{
+    display: none;
 }
 
 /* Formulaire de ramassage */

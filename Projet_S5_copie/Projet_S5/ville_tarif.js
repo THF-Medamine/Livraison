@@ -9,6 +9,7 @@ const translations = {
     list: "Liste des livraisons",
     prices: "Tarifs de livraison",
     status: "Statut",
+    blacklist_title : "Liste des tarifs",
     modify: "Modifier",
     logout: "Déconnexion",
     delivery_prices: "Tarifs de livraison – Grandes villes du Maroc",
@@ -25,6 +26,7 @@ const translations = {
     list: "Delivery List",
     prices: "Delivery Rates",
     status: "Status",
+    blacklist_title: "Black List",
     modify: "Modify",
     logout: "Logout",
     delivery_prices: "Delivery Prices – Major Cities in Morocco",
@@ -41,6 +43,7 @@ const translations = {
     list: "قائمة التسليم",
     prices: "أسعار التسليم",
     status: "الحالة",
+    blacklist_title : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
     delivery_prices: "أسعار التسليم – المدن الكبرى في المغرب",
@@ -53,6 +56,11 @@ const translations = {
 /* DARK MODE */
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark-mode");
+}
+
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
 }
 
 /* APPLY LANGUAGE */
@@ -146,7 +154,8 @@ function render() {
 // Open edit form
 function openForEdit(city) {
   if (!isAdmin()) {
-    alert('Action réservée aux administrateurs');
+          showPopup("error", t("Action réservée aux administrateurs"));
+
     return;
   }
   
@@ -161,7 +170,8 @@ function openForEdit(city) {
 // Delete city
 function deleteCity(city) {
   if (!isAdmin()) {
-    alert('Action réservée aux administrateurs');
+      showPopup("error", t("Action réservée aux administrateurs"));
+
     return;
   }
   
@@ -178,7 +188,7 @@ function saveFromForm(e) {
   e.preventDefault();
   
   if (!isAdmin()) {
-    alert('Action réservée aux administrateurs');
+    showPopup("error", t("Action réservée aux administrateurs"));
     return;
   }
   
@@ -188,12 +198,12 @@ function saveFromForm(e) {
   const express = Number(document.getElementById('express-input').value);
   
   if (!city) {
-    alert('Ville requise');
+    showPopup("error", t("Ville requise"));
     return;
   }
   
   if (isNaN(standard) || isNaN(express)) {
-    alert('Tarifs invalides');
+    showPopup("error", t("Tarifs invalides"));
     return;
   }
   
@@ -209,7 +219,7 @@ function saveFromForm(e) {
 // Show add form
 function showAdd() {
   if (!isAdmin()) {
-    alert('Action réservée aux administrateurs');
+    showPopup("error", t("Action réservée aux administrateurs"));
     return;
   }
   
@@ -219,6 +229,28 @@ function showAdd() {
   document.getElementById('express-input').value = '';
   document.getElementById('form-container').style.display = 'block';
 }
+
+/* POPUP*/
+function t(key) {
+  const lang = localStorage.getItem("language") || "fr";
+  return translations[lang][key] || key;
+}
+
+function showPopup(type, message) {
+  const popup = document.getElementById("popup");
+  document.getElementById("popup-title").textContent =
+    type === "error" ? t("error") : t("success");
+  document.getElementById("popup-message").textContent = message;
+  document.getElementById("popup-btn").textContent = t("popup_ok");
+  popup.classList.remove("hidden");
+}
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+document.getElementById("popup-btn").onclick = closePopup;
+document.getElementById("popup-close").onclick = closePopup;
+
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {

@@ -75,3 +75,7 @@ const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") {
   document.body.classList.add("dark-mode");
 } 
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
+}

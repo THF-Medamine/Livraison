@@ -17,7 +17,7 @@
         <div class="logo">
        <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="">
 
- </div>
+ </div> 
         <h3 data-i18n="menu">Menu</h3>
         <ul>
             <li><a href="index.html"  data-i18n="home">Accueil</a></li>
@@ -25,8 +25,8 @@
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">liste des livraison</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">liste des tarifs</a></li>
-            <li><a href="statut.html" data-i18n="status">Statut</a></li>
-            <li><a href="black_liste.html" data-i18n="black_liste" class="admin-only">Black_liste</a></li>
+            <li><a href="statut.html" data-i18n="status" class="admin_only">Statut</a></li>
+            <li><a href="black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
@@ -65,7 +65,7 @@
         </select>
         
 
-<input type="submit" value="Enregistrer" data-i18n-value="save" onclick="ajouter(event)">
+<input type="submit" value="Enregistrer"  data-i18n-value="save" onclick="ajouter(event)">
 </div>   
 
 <div id="popup" class="popup hidden">
@@ -254,7 +254,7 @@ body::before {
     position: relative;
     overflow: hidden;
 }
-.admin .sidebar ul li .admin-only{
+.admin .sidebar ul li .admin_only{
     display: none;
 }
 .sidebar ul li a::before {
@@ -277,6 +277,8 @@ body::before {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
+
+
 
 /* Container du formulaire */
 .inputs {

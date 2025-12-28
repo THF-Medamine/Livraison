@@ -16,6 +16,7 @@ const translations = {
     logout_message: "أنت تقوم بتسجيل الخروج...",
   }
 };
+
 /* APPLY LANGUAGE */
 function applyLanguage() {
   const lang = localStorage.getItem("language") || "fr";

@@ -9,6 +9,7 @@ const translations = {
     list: "Liste des livraisons",
     prices: "Tarifs de livraison",
     status: "Statut",
+    black_liste : "Liste noire",
     modify: "Modifier",
     logout: "Déconnexion",
 
@@ -44,6 +45,7 @@ const translations = {
     list: "Delivery List",
     prices: "Delivery Rates",
     status: "Status",
+    black_liste : "Black List",
     modify: "Modify",
     logout: "Logout",
     filter_by_status: "Filter by status:",
@@ -77,6 +79,7 @@ const translations = {
     list: "قائمة التسليم",
     prices: "أسعار التوصيل",
     status: "الحالة",
+    black_liste : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
     filter_by_status: "التصفية حسب الحالة:",
@@ -205,7 +208,7 @@ function afficherLivraisons(filtreStatut) {
             localStorage.setItem("produits", JSON.stringify(listeProduits));
             afficherLivraisons(statutFilter.value);
           } else {
-            alert("This element will not be deleted.");
+          showPopup("error", t("This element will not be deleted."));
           }
         } catch (error) {
           console.error("An error occurred:", error);
@@ -218,7 +221,11 @@ function afficherLivraisons(filtreStatut) {
     });
   }
 }
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
 
+}
 // Afficher toutes les livraisons au chargement
 afficherLivraisons("tous");
 

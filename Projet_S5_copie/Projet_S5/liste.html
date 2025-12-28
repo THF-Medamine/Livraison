@@ -22,7 +22,8 @@
             <li><a href="ramassage.htm" data-i18n="pickup">Ramassage</a></li>
             <li><a href="liste.html" data-i18n="list">Liste des livraisons</a></li>
             <li><a href="ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
-            <li><a href="statut.html" data-i18n="status">Statut</a></li>
+            <li><a href="statut.html" data-i18n="status" class="admin_only">Statut</a></li>
+             <li><a href="black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
@@ -245,7 +246,9 @@ body::before {
     background: rgba(255, 255, 255, 0.25);
     transform: translateX(10px);
 }
-
+.admin .sidebar ul li .admin_only{
+    display: none;
+}
 /* Conteneur principal */
 .main-content {
     margin-left: 280px;

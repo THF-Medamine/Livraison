@@ -9,6 +9,7 @@ const translations = {
     list: "Liste des livraisons",
     prices: "Tarifs de livraison",
     status: "Statut",
+      Black_liste : "Liste noire",
     modify: "Modifier",
     logout: "Déconnexion",
 
@@ -34,6 +35,7 @@ commencer:"Commencer maintenant",
     list: "Delivery List",
     prices: "Delivery Prices",
     status: "Status",
+    Black_liste: "Black List",
     modify: "Edit",
     logout: "Logout",
     welcome_message: "Welcome to our delivery platform",
@@ -58,6 +60,7 @@ commencer:"Get Started",
     list: "قائمة التسليم",
     prices: "أسعار التوصيل",
     status: "الحالة",
+    Black_liste : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
     welcome_message: "مرحبًا بكم في منصة التوصيل الخاصة بنا",
@@ -74,17 +77,21 @@ commencer:"البدء الآن",
   voir_tarifs:"عرض أسعارنا"
   }
 };
-/*LANGUAGE FUNCTIONS*/
+
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
+}
 function t(key) {
   const lang = localStorage.getItem("language") || "fr";
   return translations[lang][key] || key;
 }
-
+/* APPLY LANGUAGE */
 function setLanguage(lang) {
   localStorage.setItem("language", lang);
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
-    el.textContent = t(el.dataset.i18n);
+    el.textContent = t(el.dataset.i18n); // dataset pour tout les proprietés qui commence par data-
   });
 
   document.querySelectorAll("[data-i18n-value]").forEach(el => {
@@ -116,7 +123,6 @@ if (localStorage.getItem("theme") === "dark") {
 
 } else {
   toggle.classList.add("bi-moon");
-
 }
 
 toggle.addEventListener("click", () => {

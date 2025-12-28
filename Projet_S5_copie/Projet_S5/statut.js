@@ -9,6 +9,7 @@ const translations = {
     list: "Liste des livraisons",
     prices: "Tarifs de livraison",
     status: "Statut",
+    Black_liste : "Liste noire",
     modify: "Modifier",
     logout: "Déconnexion",
     status_management:"Gestion des Statuts",
@@ -24,6 +25,7 @@ const translations = {
     list: "Delivery List",
     prices: "Delivery Rates",
     status: "Status",
+    Black_liste: "Black List",
     modify: "Modify",
     logout: "Logout",
     status_management:"Status Management",
@@ -39,6 +41,7 @@ const translations = {
     list: "قائمة التسليم",
     prices: "أسعار التسليم",
     status: "الحالة",
+    Black_liste : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
     status_management:"إدارة الحالة",
@@ -80,7 +83,10 @@ const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") {
   document.body.classList.add("dark-mode");
 } 
-
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
+}
 // Check role from sessionStorage
 const userStr = sessionStorage.getItem('connectedUser');
 const user = userStr ? JSON.parse(userStr) : null;
@@ -122,13 +128,35 @@ if (!isAdmin) {
     tbody.appendChild(row);
   });
 }
+/* POPUP*/
+function t(key) {
+  const lang = localStorage.getItem("language") || "fr";
+  return translations[lang][key] || key;
+}
+
+function showPopup(type, message) {
+  const popup = document.getElementById("popup");
+  document.getElementById("popup-title").textContent =
+    type === "error" ? t("error") : t("success");
+  document.getElementById("popup-message").textContent = message;
+  document.getElementById("popup-btn").textContent = t("popup_ok");
+  popup.classList.remove("hidden");
+}
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+document.getElementById("popup-btn").onclick = closePopup;
+document.getElementById("popup-close").onclick = closePopup;
+
 
 function changerStatut(select, index) {
   // Check role permission
   const userStr = sessionStorage.getItem('connectedUser');
   const user = userStr ? JSON.parse(userStr) : null;
   if (!user || user.role !== 'admin') {
-    alert('Action réservée aux administrateurs');
+      showPopup("error", t("Action réservée aux administrateurs"));
+
     return;
   }
 

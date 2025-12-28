@@ -9,6 +9,7 @@
       list: "Liste des livraisons",
       prices: "Tarifs de livraison",
       status: "Statut",
+      Black_liste : "Liste noire",
       modify: "Modifier",
       delete: "Supprimer",
       logout: "Déconnexion",
@@ -29,6 +30,7 @@
       list: "Delivery List",
       prices: "Delivery Rates",
       status: "Status",
+      Black_liste: "Black List",
       modify: "Modify",
       delete: "Delete",
       logout: "Logout",
@@ -49,6 +51,7 @@
       list: "قائمة التسليم",
       prices: "أسعار التسليم",
       status: "الحالة",
+      Black_liste : "القائمة السوداء",
       modify: "تعديل",
       delete: "حذف",
       logout: "تسجيل الخروج",
@@ -195,7 +198,10 @@
     const inputs = [villeEl, nomEl, telEl, adresseEl, colisEl];
     let valid = true;
     inputs.forEach(i => { if (!i || i.value.trim() === '') valid = false; });
-    if (!valid) { alert('Veuillez remplir tous les champs.'); return; }
+    if (!valid) {
+       showPopup("error", t("Veuillez remplir tous les champs."));
+ return;
+ }
 
     if (editId) {
       // update
@@ -212,7 +218,7 @@
         saveRamassages();
         renderRamassages();
         clearForm();
-        alert('Ramassage mis à jour.');
+         showPopup("error", t("Ramassage mis à jour."));
       }
     } else {
       // create
@@ -228,11 +234,36 @@
       saveRamassages();
       renderRamassages();
       clearForm();
-      alert('Ramassage enregistré.');
+        showPopup("error", t("Ramassage enregistré."));
+
     }
   });
 
   // initial render
   renderRamassages();
+/* POPUP*/
+function t(key) {
+  const lang = localStorage.getItem("language") || "fr";
+  return translations[lang][key] || key;
+}
+
+function showPopup(type, message) {
+  const popup = document.getElementById("popup");
+  document.getElementById("popup-title").textContent =
+    type === "error" ? t("error") : t("success");
+  document.getElementById("popup-message").textContent = message;
+  document.getElementById("popup-btn").textContent = t("popup_ok");
+  popup.classList.remove("hidden");
+}
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+document.getElementById("popup-btn").onclick = closePopup;
+document.getElementById("popup-close").onclick = closePopup;
 
 
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
+}
