@@ -7,8 +7,9 @@ const translations = {
     add: "Ajouter une livraison",
     pickup: "Ramassage",
     list: "Liste des livraisons",
-    prices: "Tarifs de livraison",
+    prices: "Liste des tarifs",
     status: "Statut",
+    location: "Localisation",
     blacklist_title : "Liste des tarifs",
     modify: "Modifier",
     logout: "Déconnexion",
@@ -16,6 +17,8 @@ const translations = {
     city: "Ville",
     standard_rate: "Tarif Standard",
     express_rate: "Tarif Express",
+    message1: "Action réservée aux administrateurs",
+
   },
   en: {
     title: "Pickup",
@@ -24,8 +27,9 @@ const translations = {
     add: "Add Delivery",
     pickup: "Pickup",
     list: "Delivery List",
-    prices: "Delivery Rates",
-    status: "Status",
+    prices: "Price list",
+        status: "Status",
+    location: "Location",
     blacklist_title: "Black List",
     modify: "Modify",
     logout: "Logout",
@@ -43,6 +47,7 @@ const translations = {
     list: "قائمة التسليم",
     prices: "أسعار التسليم",
     status: "الحالة",
+    location: "الموقع",
     blacklist_title : "القائمة السوداء",
     modify: "تعديل",
     logout: "تسجيل الخروج",
@@ -154,7 +159,7 @@ function render() {
 // Open edit form
 function openForEdit(city) {
   if (!isAdmin()) {
-          showPopup("error", t("Action réservée aux administrateurs"));
+          showPopup("error", t("message1"));
 
     return;
   }
@@ -170,7 +175,7 @@ function openForEdit(city) {
 // Delete city
 function deleteCity(city) {
   if (!isAdmin()) {
-      showPopup("error", t("Action réservée aux administrateurs"));
+      showPopup("error", t("message"));
 
     return;
   }
@@ -188,7 +193,7 @@ function saveFromForm(e) {
   e.preventDefault();
   
   if (!isAdmin()) {
-    showPopup("error", t("Action réservée aux administrateurs"));
+    showPopup("error", t("message1"));
     return;
   }
   
