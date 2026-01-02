@@ -56,6 +56,7 @@ const translations = {
     amount: "Montant total",
     phone_client: "Téléphone du client",
     address_client: "Adresse du client",
+    city_not_found:"Ce numéro est dans la liste noire !!",
     products: "Produits",
     delivery_type: "Type de livraison",
     choose_type: "Choisir le type",
@@ -85,6 +86,7 @@ const translations = {
     modify: "Modify",
     logout: "Logout",
     location: "Location",
+    city_not_found:"This number is in the black list !!",
     pickup_city: "Pickup city",
     client_city: "Client city",
     client_name: "Client name",
@@ -118,6 +120,7 @@ const translations = {
     Black_liste : "القائمة السوداء",
     modify: "تعديل",
     location: "الموقع",
+    city_not_found:"هذا الرقم في القائمة السوداء !!",
     logout: "تسجيل الخروج",
     pickup_city: "مدينة الاستلام",
     client_city: "مدينة الزبون",
@@ -229,7 +232,7 @@ let telephone_client = document.getElementById("telephone_client");
    let numeros = JSON.parse(localStorage.getItem('blacklist')) || [];
     
     if (numeros.includes(numero)) {
-        showPopup("error", t("Ce numéro est dans la liste noire !!"));
+        showPopup("error", t("city_not_found"));
         telephone_client.focus();
         return;
     }
