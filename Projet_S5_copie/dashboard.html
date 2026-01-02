@@ -4,23 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="sidebar">
         <div class="logo">
-            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
+            <img src="../Projet_S5_copie/Projet_S5/logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
         </div>
         <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="../index.html" data-i18n="home">Accueil</a></li>
-            <li><a href="../ajouter.html" data-i18n="add">Ajouter une colis</a></li>
-            <li><a href="../ramassage.htm" data-i18n="pickup">Ramassage</a></li>
-            <li><a href="../liste.html" data-i18n="list">Liste des livraisons</a></li>
-            <li><a href="../ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
-            <li><a href="../statut.html" data-i18n="status" class="admin_only">Statut</a></li>
-             <li><a href="black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
-            <li><a href="localisation.html" data-i18n="location">Localisation</a></li>
-             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="#" data-i18n="dashboard">Dashboard</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ajouter.html" data-i18n="add">Ajouter une colis</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ramassage.htm" data-i18n="pickup">Ramassage</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/liste.html" data-i18n="list">Liste des livraisons</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/statut.html" data-i18n="status" class="admin_only">Statut</a></li>
+             <li><a href="../Projet_S5_copie/Projet_S5/black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
+            <li><a href="../Projet_S5_copie/Projet_S5/localisation.html" data-i18n="location">Localisation</a></li>
+             <li><a href="../Projet_S5_copie/Projet_S5/deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
     <div class="main-content">
@@ -133,6 +136,7 @@
             </div>
         </div>
     </div>
+     <script src="dashboard.js"></script>
 </body>
 </html>
 <style>
@@ -149,7 +153,7 @@
     height: auto;
     border-radius: 15px;
 }
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -195,7 +199,8 @@
             box-shadow: 8px 0 32px rgba(0, 0, 0, 0.1);
             z-index: 100;
             transition: all 0.3s ease;
-            overflow-y: auto;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
 
         .sidebar::-webkit-scrollbar {
@@ -205,11 +210,18 @@
         .sidebar::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
+            margin: 10px 0;
         }
 
         .sidebar::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
 
         .sidebar:hover {
@@ -227,6 +239,13 @@
 
         .logo:hover {
             transform: scale(1.05) rotate(2deg);
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar h3 {
@@ -698,4 +717,3 @@
             }
         }
     </style>
-    <script src="dashboard.js"></script>
