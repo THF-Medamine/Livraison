@@ -3,67 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title data-i18n="title">Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script>
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
 </head>
 <body>
   <div class="sidebar">
         <div class="logo">
-            <img src="logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
+            <img src="../Projet_S5_copie/Projet_S5/logo-livraison-pour-entreprises_23-2147873004.webp" alt="Logo">
         </div>
         <h3 data-i18n="menu">Menu</h3>
         <ul>
-            <li><a href="../index.html" data-i18n="home">Accueil</a></li>
-            <li><a href="../ajouter.html" data-i18n="add">Ajouter une colis</a></li>
-            <li><a href="../ramassage.htm" data-i18n="pickup">Ramassage</a></li>
-            <li><a href="../liste.html" data-i18n="list">Liste des livraisons</a></li>
-            <li><a href="../ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
-            <li><a href="../statut.html" data-i18n="status" class="admin_only">Statut</a></li>
-             <li><a href="black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
-            <li><a href="localisation.html" data-i18n="location">Localisation</a></li>
-             <li><a href="deconnexion.html" data-i18n="logout">Déconnexion</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/index.html" data-i18n="home">Accueil</a></li>
+            <li><a href="#" data-i18n="dashboard">Dashboard</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ajouter.html" data-i18n="add">Ajouter une colis</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ramassage.htm" data-i18n="pickup">Ramassage</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/liste.html" data-i18n="list">Liste des livraisons</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/ville_tarif.html" data-i18n="prices">Liste des tarifs</a></li>
+            <li><a href="../Projet_S5_copie/Projet_S5/statut.html" data-i18n="status" class="admin_only">Statut</a></li>
+             <li><a href="../Projet_S5_copie/Projet_S5/black_liste.html" data-i18n="Black_liste" class="admin_only">Black liste</a></li> 
+            <li><a href="../Projet_S5_copie/Projet_S5/localisation.html" data-i18n="location">Localisation</a></li>
+             <li><a href="../Projet_S5_copie/Projet_S5/deconnexion.html" data-i18n="logout">Déconnexion</a></li>
         </ul>
     </div>
     <div class="main-content">
         <div class="dashboard-container">
             <!-- Header -->
             <div class="header">
-                <h1>Dashboard Livraison</h1>
-                <p>Gestion et suivi des commandes - Admin</p>
+                <h1 data-i18n="title_h1">Dashboard Livraison</h1>
+                <p data-i18n="subtitle">Gestion et suivi des commandes - Admin</p>
             </div>
 
             <!-- Stats Cards -->
             <div class="stats-grid">
                 <div class="stat-card blue">
                     <div class="stat-content">
-                        <h3>Total</h3>
+                        <h3 data-i18n="total">Total</h3>
                         <p id="stat-total">0</p>
                     </div>
                     <div class="stat-icon">📦</div>
                 </div>
                 <div class="stat-card yellow">
                     <div class="stat-content">
-                        <h3>En attente</h3>
+                        <h3 data-i18n="pending">En attente</h3>
                         <p id="stat-attente">0</p>
                     </div>
                     <div class="stat-icon">⏱️</div>
                 </div>
                 <div class="stat-card blue">
                     <div class="stat-content">
-                        <h3>En cours</h3>
+                        <h3 data-i18n="in_progress">En cours</h3>
                         <p id="stat-cours">0</p>
                     </div>
                     <div class="stat-icon">🚚</div>
                 </div>
                 <div class="stat-card green">
                     <div class="stat-content">
-                        <h3>Livrées</h3>
+                        <h3 data-i18n="delivered">Livrées</h3>
                         <p id="stat-livrees">0</p>
                     </div>
                     <div class="stat-icon">✅</div>
                 </div>
                 <div class="stat-card red">
                     <div class="stat-content">
-                        <h3>Annulées</h3>
+                        <h3 data-i18n="cancelled">Annulées</h3>
                         <p id="stat-annulees">0</p>
                     </div>
                     <div class="stat-icon">❌</div>
@@ -73,7 +82,7 @@
             <!-- Revenue Card -->
             <div class="revenue-card">
                 <div>
-                    <h3>Revenue Total (Livrées)</h3>
+                    <h3 data-i18n="revenue_total">Revenue Total (Livrées)</h3>
                     <p id="revenue-total">0 DH</p>
                 </div>
                 <div style="font-size: 3.5rem; opacity: 0.3; z-index: 1;">💰</div>
@@ -82,15 +91,15 @@
             <!-- Charts -->
             <div class="charts-grid">
                 <div class="chart-card">
-                    <h3>📊 Répartition des statuts</h3>
+                    <h3 data-i18n="status_distribution">📊 Répartition des statuts</h3>
                     <canvas id="pieChart"></canvas>
                 </div>
                 <div class="chart-card">
-                    <h3>💵 Revenue par ville</h3>
+                    <h3 data-i18n="revenue_by_city">💵 Revenue par ville</h3>
                     <canvas id="barChart"></canvas>
                 </div>
                 <div class="chart-card">
-                    <h3>📈 Tendance (7 derniers jours)</h3>
+                    <h3 data-i18n="trend">📈 Tendance (7 derniers jours)</h3>
                     <canvas id="lineChart"></canvas>
                 </div>
             </div>
@@ -98,15 +107,15 @@
             <!-- Controls -->
             <div class="controls">
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Rechercher par code, client, ville...">
+                    <input type="text" id="searchInput" placeholder="Rechercher par code, client, ville..." data-i18n-placeholder="search_placeholder">
                 </div>
                 <div class="filter-box">
                     <select id="filterStatus">
-                        <option>Tous</option>
-                        <option>En attente</option>
-                        <option>En cours</option>
-                        <option>Livrée</option>
-                        <option>Annulée</option>
+                        <option data-i18n="all">Tous</option>
+                        <option data-i18n="pending">En attente</option>
+                        <option data-i18n="in_progress">En cours</option>
+                        <option data-i18n="delivered_">Livrée</option>
+                        <option data-i18n="cancelled">Annulée</option>
                     </select>
                 </div>
             </div>
@@ -116,15 +125,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Client</th>
-                            <th>Produit</th>
-                            <th>Villes</th>
-                            <th>Type</th>
-                            <th>Montant</th>
-                            <th>Statut</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                            <th data-i18n="code">Code</th>
+                            <th data-i18n="client">Client</th>
+                            <th data-i18n="product">Produit</th>
+                            <th data-i18n="city">Villes</th>
+                            <th data-i18n="type">Type</th>
+                            <th data-i18n="amount">Montant</th>
+                            <th data-i18n="status">Statut</th>
+                            <th data-i18n="date">Date</th>
+                            <th data-i18n="actions">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -133,6 +142,7 @@
             </div>
         </div>
     </div>
+     <script src="dashboard.js"></script>
 </body>
 </html>
 <style>
@@ -149,7 +159,7 @@
     height: auto;
     border-radius: 15px;
 }
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -182,7 +192,9 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(50px, 50px); }
         }
-
+.admin .sidebar ul li .admin_only{
+    display: none;
+}
         /* Sidebar avec effet glassmorphism */
         .sidebar {
             width: 280px;
@@ -195,7 +207,8 @@
             box-shadow: 8px 0 32px rgba(0, 0, 0, 0.1);
             z-index: 100;
             transition: all 0.3s ease;
-            overflow-y: auto;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
 
         .sidebar::-webkit-scrollbar {
@@ -205,11 +218,18 @@
         .sidebar::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
+            margin: 10px 0;
         }
 
         .sidebar::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
 
         .sidebar:hover {
@@ -227,6 +247,13 @@
 
         .logo:hover {
             transform: scale(1.05) rotate(2deg);
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar h3 {
@@ -319,7 +346,10 @@
                 transform: translateY(0);
             }
         }
-
+/* Mode sombre */
+.dark-mode {
+  background: black ;
+}
         /* Header */
         .header {
             margin-bottom: 30px;
@@ -697,5 +727,83 @@
                 min-width: 800px;
             }
         }
+     /* =========================
+   RTL MODE (Arabic layout)
+   ========================= */
+
+body.rtl {
+  direction: rtl;
+}
+
+/* ===== Sidebar تنتقل لليمين ===== */
+body.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* ===== المحتوى الرئيسي ===== */
+body.rtl .main-content {
+  margin-left: 0 !important;
+  margin-right: 280px;
+}
+
+/* ===== الفورم ===== */
+body.rtl .inputs {
+  margin-left: 40px;
+  margin-right: 340px;
+}
+
+/* ===== العناوين والروابط ===== */
+body.rtl .sidebar h3,
+body.rtl .sidebar ul li a {
+  text-align: right;
+}
+
+/* ===== hover يتحرك بالعكس ===== */
+body.rtl .sidebar ul li:hover {
+  transform: translateX(-10px);
+}
+
+/* ===== اللمعة (animation) ===== */
+body.rtl .sidebar ul li a::before {
+  left: auto;
+  right: -100%;
+}
+
+body.rtl .sidebar ul li a:hover::before {
+  right: 100%;
+}
+
+/* ===== labels ===== */
+body.rtl .inputs label::before {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* ===== inputs / select ===== */
+body.rtl input,
+body.rtl select,
+body.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== welcome section ===== */
+body.rtl .welcome-container,
+body.rtl .welcome-container h1,
+body.rtl .welcome-container p {
+  text-align: right;
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  body.rtl .main-content {
+    margin-right: 0;
+  }
+
+  body.rtl .inputs {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
     </style>
-    <script src="dashboard.js"></script>

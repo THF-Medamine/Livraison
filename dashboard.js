@@ -1,3 +1,174 @@
+        /* TRANSLATIONS*/
+const translations = {
+  fr: {
+    title: "Tableau de bord",
+    menu:"Menu",
+ home: "Accueil",
+    add: "Ajouter une livraison",
+    pickup: "Ramassage",
+    list: "Liste des livraisons",
+    prices: "Liste des tarifs",
+    status: "Statut",
+    location: "Localisation",
+    blacklist_title : "Liste des tarifs",
+    logout: "Déconnexion",
+    dashboard: "Tableau de bord",
+  title_h1: "Dashboard Livraison",
+  subtitle :"Gestion et Suivi des commandes - Admin",
+  total :"Total",
+  pending :"En attente",
+  in_progress :"En cours",
+  delivered :"Livrées",
+    cancelled :"Annulées",
+    revenue_total :"Revenue Total (Livrées)",
+    status_distribution :"📊 Répartition des statuts",
+    revenue_by_city :"💵 Revenue par ville",
+    trend :"📈 Tendance (7 derniers jours)",
+    code:"Code",
+    client:"Client",
+    product:"Produit",
+    city:"Villes",
+    type:"Type",
+    amount:"Montant",
+    status:"Statut",
+    date:"Date",
+    actions:"Actions",
+    all:"Tous",
+    pending:"En attente",
+    in_progress:"En cours",
+    delivered_:"Livrée",
+    cancelled:"Annulée",
+    search_placeholder:"Rechercher par code, client, ville...",
+    confirme_message:"Êtes-vous sûr de vouloir supprimer cette commande?",
+  },
+  en: {
+    title: "dashboard",
+    menu:"Menu",
+ home: "Home",
+    add: "Add Delivery",
+    pickup: "Pickup",
+    list: "Delivery List",
+    prices: "Price list",
+        status: "Status",
+    location: "Location",
+    blacklist_title: "Black List",
+    logout: "Logout",
+  dashboard: "Dashboard",
+    title_h1: "Delivery Dashboard",
+    subtitle :"Order Management and Tracking - Admin",
+    total :"Total",
+    pending :"Pending",
+    in_progress :"In Progress",
+    delivered :"Delivered",
+    cancelled :"Cancelled",
+    revenue_total :"Total Revenue (Delivered)",
+    status_distribution :"📊 Status Distribution",
+    revenue_by_city :"💵 Revenue by City",
+    trend :"📈 Trend (Last 7 Days)",
+    code:"Code",
+    client:"Client",
+    product:"Product",
+    city:"Cities",
+    type:"Type",
+    amount:"Amount",
+    status:"Status",
+    date:"Date",
+    actions:"Actions",
+    all:"All",
+    pending:"Pending",
+    in_progress:"In Progress",
+    delivered_:"Delivered",
+    cancelled:"Cancelled",
+    search_placeholder:"Search by code, client, city...",
+    confirme_message:"Are you sure you want to delete this order?",
+  },
+  ar: { 
+    title: "لوحة القيادة",
+    menu:"القائمة",
+ home: "الصفحة الرئيسية",
+    add: "إضافة تسليم",
+    pickup: "الاستلام",
+    list: "قائمة التسليم",
+    prices: "أسعار التسليم",
+    status: "الحالة",
+    location: "الموقع",
+    blacklist_title : "القائمة السوداء",
+    logout: "تسجيل الخروج",
+  dashboard: "لوحة القيادة",
+    title_h1: "لوحة تحكم التوصيل",
+    subtitle :"إدارة وتتبع الطلبات - المسؤول",
+    total :"المجموع",
+    pending :"قيد الانتظار",
+    in_progress :"قيد التنفيذ",
+    delivered :"تم التوصيل",
+    cancelled :"ملغاة",
+    revenue_total :"إجمالي الإيرادات (تم التوصيل)",
+    status_distribution :"📊 توزيع الحالة",
+    revenue_by_city :"💵 الإيرادات حسب المدينة",
+    trend :"📈 الاتجاه (آخر 7 أيام)",
+    code:"الرمز",
+    client:"العميل",
+    product:"المنتج",
+    city:"المدن",
+    type:"النوع",
+    amount:"المبلغ",
+    status:"الحالة",
+    date:"التاريخ",
+    actions:"الإجراءات",
+    all:"الكل",
+    pending:"قيد الانتظار",
+    in_progress:"قيد التنفيذ",
+    delivered_:"تم التوصيل",
+    cancelled:"ملغاة",
+    search_placeholder:"ابحث بالرمز، العميل، المدينة...",
+    confirme_message:"هل أنت متأكد أنك تريد حذف هذا الطلب؟",
+  }
+};
+/* APPLY LANGUAGE */
+function applyLanguage() {
+  const lang = localStorage.getItem("language") || "fr";
+
+  // text
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = translations[lang][key] || key;
+  });
+
+  // value (button, input)
+  document.querySelectorAll("[data-i18n-value]").forEach(el => {
+    const key = el.dataset.i18nValue;
+    el.value = translations[lang][key] || key;
+  });
+
+// placeholder (input / textarea)
+document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+  const key = el.dataset.i18nPlaceholder;
+  el.placeholder = translations[lang][key] || key;
+});
+ if (lang === "ar") {
+    document.documentElement.dir = "rtl";
+    document.body.classList.add("rtl");
+  } else {
+    document.documentElement.dir = "ltr";
+    document.body.classList.remove("rtl");
+  }
+}
+
+
+applyLanguage();
+
+
+//DARK | LIGHT MODE 
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+} 
+// pour cacher les options admin si user connecté
+if(JSON.parse(sessionStorage.getItem("connectedUser")).role=="user"){
+  document.body.classList.add("admin");
+}
+
        let commandes = [];
         let editingId = null;
         let charts = {};
@@ -271,7 +442,7 @@
 
         // Delete Commande
         function deleteCommande(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer cette commande?')) {
+            if (confirm(t("confirme_message"))) {
                 commandes = commandes.filter(cmd => cmd.id !== id);
                 saveData();
                 updateDashboard();
